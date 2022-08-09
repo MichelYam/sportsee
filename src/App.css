@@ -45,6 +45,7 @@ nav .navbar li a {
   color: #ffffff;
   font-size: 24px;
 }
+
 /* sidebar */
 .sidebar {
   position: fixed;
@@ -67,9 +68,11 @@ nav .navbar li a {
   align-items: center;
   margin-top: 91px;
 }
-.sidebar-menu-item{
+
+.sidebar-menu-item {
   margin-bottom: 20px;
 }
+
 .copyright {
   writing-mode: vertical-rl;
   text-orientation: mixed;
@@ -78,6 +81,50 @@ nav .navbar li a {
 }
 
 /* content */
-.container{
- margin: 100px 0 0 200px;
+/* .container {
+  margin: 100px 0 0 200px;
+} */
+
+.container .title {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 24px;
+  margin-bottom: 41px;
 }
+
+.container .title span {
+  color: #FF0101;
+}
+
+.container .congrat {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+
+.recharts-wrapper {
+  position: relative;
+}
+
+
+.recharts-default-legend {
+  position: absolute;
+  margin: 0;
+  right: 0;
+  top: -60px;
+}
+
+
+.recharts-legend-item-text {
+  color: #74798C !important;
+}
+
+/* #FF0000 */
+
+
+/* #282D30 radar */
