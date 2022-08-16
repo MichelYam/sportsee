@@ -12,10 +12,10 @@ export default function ListCard({ userId }) {
             {/* {nutrition.map((item) => {
                 return <Card key={item} item={item} />
             })} */}
-            <Card type="Calories" value={nutrition.calorie} />
-            <Card type="Proteines" value={nutrition.protein} />
-            <Card type="Glucides" value={nutrition.carbohydrate} />
-            <Card type="Lipides" value={nutrition.lipid} />
+            <Card type="Calories" value={nutrition.calorieCount} />
+            <Card type="Proteines" value={nutrition.proteinCount} />
+            <Card type="Glucides" value={nutrition.carbohydrateCount} />
+            <Card type="Lipides" value={nutrition.lipidCount} />
         </DashBoardNutri>
     )
 }
@@ -24,5 +24,4 @@ const DashBoardNutri = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: space-between;
-height: 100%;
 `;

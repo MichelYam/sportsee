@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 import { getRadarPerformance, getLabel } from "../services/mock/mockApi";
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
@@ -8,11 +9,11 @@ import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Responsi
 export default function RadarPerf({ userId }) {
     const data = getRadarPerformance(userId)
     const dataWithLabel = getLabel(data)
-    const dataReverse = [...dataWithLabel].reverse()
+    const dataReverse = [...dataWithLabel].reverse();
     return (
         <StyledRadarPerf>
             <ResponsiveContainer width="100%" height="100%">
-                <RadarChart outerRadius="80%" data={dataReverse}>
+                <RadarChart cx="50%" cy="50%" outerRadius="70%" data={dataReverse}>
                     <PolarGrid radialLines={false} />
                     <PolarAngleAxis dataKey="kind"
                         stroke="white"
@@ -22,7 +23,7 @@ export default function RadarPerf({ userId }) {
                             fontSize: 12,
                             fontWeight: 400,
                             lineHeight: 24,
-                            }} />
+                        }} />
                     <PolarRadiusAxis axisLine={false} tick={false} />
                     <Radar dataKey="value"
                         fill="#ff0101"
@@ -30,8 +31,12 @@ export default function RadarPerf({ userId }) {
                         stroke="transparent" />
                 </RadarChart>
             </ResponsiveContainer>
-        </StyledRadarPerf>
+        </StyledRadarPerf >
     )
+}
+
+RadarPerf.propTypes = {
+    userId: PropTypes.string.isRequired,
 }
 
 const StyledRadarPerf = styled.div`

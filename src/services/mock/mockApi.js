@@ -5,6 +5,14 @@ import {
     USER_PERFORMANCE,
 } from "./mockData";
 
+const activityTitleFR = {
+    1: "Cardio",
+    2: "Energie",
+    3: "Endurance",
+    4: "Force",
+    5: "Vitesse",
+    6: "Itensité",
+};
 
 export function getUserById(userId) {
     const user = USER_MAIN_DATA.find((elem) => elem.id == userId)
@@ -29,7 +37,6 @@ function refactorData(data) {
             const [yyyy, mm, dd] = item.day.split("-");
 
             dailyActivity.push({
-                // day: `${dd}/${mm}`,
                 day: `${dd}`,
                 kilogram: item.kilogram,
                 calories: item.calories,
@@ -39,16 +46,6 @@ function refactorData(data) {
     }
 }
 
-
-// export function getActivities(data) {
-//     const activitiesArr = [];
-
-//     for (let item of data) {
-//         activitiesArr.push({
-
-//         })
-//     }
-// }
 export function averageSessions(userId) {
     const data = USER_AVERAGE_SESSIONS.find((elem) => elem.userId == userId)
     return data.sessions
@@ -62,11 +59,11 @@ export function getRadarPerformance(userId) {
 
 export function getLabel(data) {
     const newArr = [];
-    for (let kind of Object.keys(data.kind)) {
+    for (let kind of Object.keys(activityTitleFR)) {
         for (let item of data.data) {
-            if (kind == item.kind) {
+            if (item.kind == kind) {
                 newArr.push({
-                    kind: data.kind[kind],
+                    kind: activityTitleFR[kind],
                     value: item.value
                 })
             }
@@ -81,3 +78,23 @@ export function getScoreOfUser(userId) {
 
     return userInfo.todayScore ? userInfo.todayScore : userInfo.score
 }
+
+// const DataRadarTitle = dataReverse.map((data) => {
+//     switch (data.kind) {
+//         case 1:
+//             return { ...data, kind: "Intensité" };
+//         case 2:
+//             return { ...data, kind: "Vitesse" };
+//         case 3:
+//             return { ...data, kind: "Force" };
+//         case 4:
+//             return { ...data, kind: "Endurance" };
+//         case 5:
+//             return { ...data, kind: "Energie" };
+//         case 6:
+//             return { ...data, kind: "Cardio" };
+//         default:
+//             return { ...data };
+//     }
+// });
+// console.log(DataRadarTitle)

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styled from 'styled-components';
-
+import PropTypes from "prop-types"
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
 import { getScoreOfUser } from '../services/mock/mockApi';
@@ -43,6 +43,10 @@ export default function Score({ userId }) {
             </ScoreContent>
         </StyledScore>
     )
+}
+
+Score.propTypes = {
+    userId: PropTypes.string.isRequired
 }
 
 const StyledScore = styled.div`

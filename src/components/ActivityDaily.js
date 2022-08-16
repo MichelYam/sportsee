@@ -1,7 +1,7 @@
 import React from 'react'
 
 import styled from 'styled-components';
-
+import PropTypes from 'prop-types';
 import {
     BarChart,
     Bar,
@@ -58,6 +58,9 @@ const CustomTooltip = ({ active, payload, label }) => {
     return null;
 };
 
+ActivityDaily.propTypes = {
+    userId: PropTypes.string.isRequired,
+}
 
 const StyledAcitivtyDaily = styled.div`
 width: 100%;

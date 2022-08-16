@@ -1,6 +1,6 @@
 // import PropTypes from "prop-types";
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const DATA_BY_TYPE = {
@@ -27,31 +27,41 @@ const DATA_BY_TYPE = {
 }
 
 export default function Card({ type, value }) {
+  const valueSemicolon = (data) => {
+    const value = data.toString();
+
+    if (value.length > 3) {
+      return `${value.slice(0, 1)},${value.slice(1, 4)}`
+    } else {
+      return value
+    }
+  }
   return (
     <NutriCard>
       <NutriCardImgContent>
         <NutriCardImg src={DATA_BY_TYPE[type].icon} alt={type} />
       </NutriCardImgContent>
       <NutriCardContent>
-        <NutriCardContentValue>{value}{DATA_BY_TYPE[type].unit}</NutriCardContentValue>
+        <NutriCardContentValue>{valueSemicolon(value)}{DATA_BY_TYPE[type].unit}</NutriCardContentValue>
         <NutriCardContentType>{type}</NutriCardContentType>
       </NutriCardContent>
     </NutriCard>
   )
 }
 
-// Card.propTypes = {
-//   type: PropTypes.string.isRequired,
-//   value: PropTypes.number.isRequired
-// }
+Card.propTypes = {
+  type: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired
+}
+
 const NutriCard = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
   border-radius: 5px;
   width: 258px;
   height: 124px;
   background-color: #FBFBFB;
+  padding: 30px
 `;
 
 const NutriCardImgContent = styled.div`
@@ -59,7 +69,7 @@ const NutriCardImgContent = styled.div`
   height: 60px;
 `;
 
-const NutriCardImg  = styled.img`
+const NutriCardImg = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -68,6 +78,7 @@ const NutriCardImg  = styled.img`
 const NutriCardContent = styled.div`
   display: flex;
   flex-direction: column;
+  margin-left: 35px
 `;
 const NutriCardContentValue = styled.p`
   font-family: 'Roboto';
@@ -83,5 +94,5 @@ const NutriCardContentType = styled.span`
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
-  color: #74798C;
+  color: rgba(116, 121, 140, 1);
 `

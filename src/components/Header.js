@@ -1,19 +1,61 @@
-import React from 'react'
+import React from 'react';
+
+import styled from 'styled-components';
 
 export default function Header() {
     return (
         <>
-            <header>
-                <img src='../assets/logo/logo.png' alt='logo du site' />
-                <nav>
-                    <ul className='navbar'>
-                        <li className='navbar-item'><a href='/'>Accueil</a></li>
-                        <li className='navbar-item'><a href='/'>Profil</a></li>
-                        <li className='navbar-item'><a href='/'>Réglage</a></li>
-                        <li className='navbar-item'><a href='/'>Communauté</a></li>
-                    </ul>
-                </nav>
-            </header>
+            <StyledHeader>
+                <StyledHeaderLogo src='../assets/logo/logo.png' alt='logo du site' />
+                <NavBar>
+                    <NavBarMenu>
+                        <NavBarMenuItem>
+                            <NavbarMenuItemLink href='/'>Accueil</NavbarMenuItemLink>
+                        </NavBarMenuItem>
+                        <NavBarMenuItem>
+                            <NavbarMenuItemLink href='/'>Profil</NavbarMenuItemLink>
+                        </NavBarMenuItem>
+                        <NavBarMenuItem>
+                            <NavbarMenuItemLink href='/'>Réglage</NavbarMenuItemLink>
+                        </NavBarMenuItem>
+                        <NavBarMenuItem>
+                            <NavbarMenuItemLink href='/'>Communauté</NavbarMenuItemLink>
+                        </NavBarMenuItem>
+                    </NavBarMenu>
+                </NavBar>
+            </StyledHeader>
         </>
     )
 }
+
+const StyledHeader = styled.div`
+position: relative;
+width: 100%;
+height: 91px;
+display: flex;
+align-items: center;
+background: #000000;
+box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+z-index: 1;
+`
+const StyledHeaderLogo = styled.img`
+margin-left: 20px;
+width: 178px;
+height: 60px;
+`
+const NavBar = styled.nav`
+width: 100%;
+
+`
+const NavBarMenu = styled.ul`
+display: flex;
+justify-content: space-evenly;
+`
+const NavBarMenuItem = styled.li`
+`
+const NavbarMenuItemLink = styled.a`
+color: #ffffff;
+font-size: 24px;
+text-decoration: none;
+`
+
