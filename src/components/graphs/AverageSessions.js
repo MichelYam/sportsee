@@ -3,7 +3,8 @@ import React from 'react'
 import styled from "styled-components";
 import PropTypes from 'prop-types';
 
-import { averageSessions } from "../services/mock/mockApi";
+// import { averageSessions } from "../services/mock/mockApi";
+import { useSportSeeAPi } from '../../services/useSportSeeApi';
 
 import {
     LineChart,
@@ -15,8 +16,11 @@ import {
 } from "recharts";
 
 export default function AverageSessions({ userId }) {
-    const data = averageSessions(userId)
-    const newData = data.map(a => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }))
+    // const data = averageSessions(userId)
+
+    const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}/average-sessions`);
+    // const activityData = data
+    let averageData = data
     return (
         <StylesAverageSession>
             <AverageSessionTitle>
@@ -26,7 +30,7 @@ export default function AverageSessions({ userId }) {
                 </AverageSessionSpan>
             </AverageSessionTitle>
             <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={newData}>
+                <LineChart data={averageData} outerRadius="70%">
                     <Line type="monotone" dataKey="sessionLength" stroke="#FFFFFF" strokeWidth={2} dot={false} activeDot={{
                         stroke: "rgba(255, 255, 255, 0.6)",
                         strokeWidth: 10,
@@ -43,7 +47,7 @@ export default function AverageSessions({ userId }) {
                             fontWeight: 500,
                         }}
                     />
-                    <YAxis dataKey='sessionLength' hide={true} stroke="rgba(255, 255, 255, 0.6)" axisLine={false} dy={10} />
+                    <YAxis dataKey='sessionLength' hide={true} stroke="rgba(255, 255, 255, 0.6)" axisLine={false} dy={10} domain={[0, "dataMax + 60"]} />
                     <Tooltip content={<CustomTooltip />}
                         cursor={{
                             stroke: "rgba(0, 0, 0, 0.1)",

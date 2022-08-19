@@ -13,12 +13,14 @@ import {
     ResponsiveContainer
 } from "recharts";
 
-import { getDailyActivityByID } from "../services/mock/mockApi";
+// import { getDailyActivityByID } from "../services/mock/mockApi";
+import { useSportSeeAPi } from '../../services/useSportSeeApi';
 
 export default function ActivityDaily({ userId }) {
 
-    // const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}/activity`);
-    const activityData = getDailyActivityByID(userId)
+    const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}/activity`);
+    const activityData = data
+
     return (
         <StyledAcitivtyDaily>
             <TitleDailyActivity>Activité quotidienne</TitleDailyActivity>

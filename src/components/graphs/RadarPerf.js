@@ -1,19 +1,23 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-import { getRadarPerformance, getLabel } from "../services/mock/mockApi";
+// import { getRadarPerformance, getLabel } from "../services/mock/mockApi";
+import { useSportSeeAPi } from '../../services/useSportSeeApi';
+
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 
 export default function RadarPerf({ userId }) {
-    const data = getRadarPerformance(userId)
-    const dataWithLabel = getLabel(data)
-    const dataReverse = [...dataWithLabel].reverse();
+    // const data = getRadarPerformance(userId)
+    // const dataWithLabel = getLabel(data)
+    // const dataReverse = [...dataWithLabel].reverse();
+    const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}/performance`);
+    let performance = data
     return (
         <StyledRadarPerf>
             <ResponsiveContainer width="100%" height="100%">
-                <RadarChart cx="50%" cy="50%" outerRadius="70%" data={dataReverse}>
+                <RadarChart cx="50%" cy="50%" outerRadius="70%" data={performance}>
                     <PolarGrid radialLines={false} />
                     <PolarAngleAxis dataKey="kind"
                         stroke="white"

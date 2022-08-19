@@ -2,21 +2,27 @@ import React from 'react'
 
 import styled from 'styled-components';
 import PropTypes from "prop-types"
+
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
-import { getScoreOfUser } from '../services/mock/mockApi';
+// import { getScoreOfUser } from '../services/mock/mockApi';
+
+import { useSportSeeAPi } from '../../services/useSportSeeApi';
+
 
 export default function Score({ userId }) {
+    const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}`);
 
-    const scoreUser = getScoreOfUser(userId)
+    let score = data.todayScore || data.score
+    if (error || isLoading) {
+        score = 0;
+    }
+    // const scoreUser = getScoreOfUser(userId)
 
     const pieData = [
-        { name: "completed", value: scoreUser, color: "#FF0000" },
-        { name: "uncompleted", value: 1 - scoreUser, color: "transparent" }
+        { name: "completed", value: score, color: "#FF0000" },
+        { name: "uncompleted", value: 1 - score, color: "transparent" }
     ]
-    // if (error || isLoading) {
-    //     todayScore = 0;
-    // }
     return (
         <StyledScore>
             <ScoreTitle>Score</ScoreTitle>
@@ -37,7 +43,7 @@ export default function Score({ userId }) {
                 </PieChart>
             </ResponsiveContainer>
             <ScoreContent>
-                <ScoreValue>{`${scoreUser * 100}%`}</ScoreValue>
+                <ScoreValue>{`${score * 100}%`}</ScoreValue>
                 <ScoreValueText>de votre </ScoreValueText>
                 <ScoreValueText>objectif</ScoreValueText>
             </ScoreContent>

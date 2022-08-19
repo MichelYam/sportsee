@@ -1,29 +1,28 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
+//Components
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import ListCard from '../components/ListCard'
-// import { useSportSeeAPi } from '../services/useSportSeeApi';
-import { getUserById } from "../services/mock/mockApi";
-import AverageSessions from '../components/AverageSessions';
-import ActivityDaily from '../components/ActivityDaily';
-import RadarPerf from '../components/RadarPerf';
-import Score from '../components/Score';
+import AverageSessions from '../components/graphs/AverageSessions';
+import ActivityDaily from '../components/graphs/ActivityDaily';
+import RadarPerf from '../components/graphs/RadarPerf';
+import Score from '../components/graphs/Score';
 
 import styled from 'styled-components';
 
+import { useSportSeeAPi } from '../services/useSportSeeApi';
+
 export default function DashBoard() {
     const { userId } = useParams();
-    // const { data, isLoading } = useSportSeeAPi(`http://localhost:3030/user/${userId}`);
-    const userDetail = getUserById(userId)
-    // const firstName = data.data.userInfos.firstName
+    const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}`);
     return (
         <>
             <Header />
             <SideBar />
             <Content>
-                <Title>Bonjour <TitleSpan>{userDetail.userInfos.firstName}</TitleSpan></Title>
+                <Title>Bonjour <TitleSpan>{!isLoading && data.userInfos.firstName}</TitleSpan></Title>
                 <MsgCongrat>Félicitation ! Vous avez explosé vos objectifs hier 👏</MsgCongrat>
                 <Dashboard>
                     <DashBoardColumn>
