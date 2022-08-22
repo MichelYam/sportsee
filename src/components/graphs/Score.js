@@ -20,14 +20,22 @@ export default function Score({ userId }) {
     // const scoreUser = getScoreOfUser(userId)
 
     const pieData = [
-        { name: "completed", value: score, color: "#FF0000" },
-        { name: "uncompleted", value: 1 - score, color: "transparent" }
+        {
+            name: "completed",
+            value: score,
+            color: "#FF0000"
+        },
+        {
+            name: "uncompleted",
+            value: 1 - score,
+            color: "transparent"
+        }
     ]
     return (
         <StyledScore>
             <ScoreTitle>Score</ScoreTitle>
             <ResponsiveContainer width="100%" height="100%">
-                <PieChart width={150} height={150}>
+                <PieChart width={150} height={150} >
                     <Pie
                         data={pieData}
                         innerRadius={70}
@@ -56,9 +64,10 @@ Score.propTypes = {
 }
 
 const StyledScore = styled.div`
-width: 258px;
+width: 30%;
 height: 263px;
 border-radius: 5px;
+overflow: hidden;
 position: relative;
 background: #FBFBFB;
 box-shadow: rgba(0, 0, 0, 0.0212);

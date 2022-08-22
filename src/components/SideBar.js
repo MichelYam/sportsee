@@ -25,6 +25,7 @@ export default function SideBar() {
 
 const StyledSideBar = styled.div`
 position: fixed;
+top: 0;
 left: 0;
 bottom: 0;
 width: 117px;

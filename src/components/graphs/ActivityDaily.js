@@ -65,8 +65,7 @@ ActivityDaily.propTypes = {
 }
 
 const StyledAcitivtyDaily = styled.div`
-width: 100%;
-height: 50%;
+height: 263px;
 background-color: #FBFBFB;
 box-shadow: rgba(0, 0, 0, 0.0212);
 `;

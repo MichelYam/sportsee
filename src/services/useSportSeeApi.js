@@ -26,7 +26,7 @@ export const useSportSeeAPi = (url) => {
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                const newData = await getData(services, data);
+                const newData = getData(services, data);
                 setData(newData);
 
             } catch (error) {
@@ -116,3 +116,19 @@ export const getDefaultKeyData = () => {
         lipidCount: 0,
     };
 };
+
+/**
+ * @returns {array.Object} default data for activities chart
+ */
+ export const getDefaultActivities = () => {
+    const activities = [];
+  
+    for (let key in activityTitleFR) {
+      activities.push({
+        activity: activityTitleFR[key],
+        value: 0,
+      });
+    }
+  
+    return activities;
+  };

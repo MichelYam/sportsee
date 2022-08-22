@@ -72,7 +72,7 @@ AverageSessions.propTypes = {
 
 const StylesAverageSession = styled.div`
     position relative;
-    width: 258px;
+    width: 30%;
     height: 263px;
     border-radius: 5px;
     overflow: hidden;

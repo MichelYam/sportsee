@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 // import { getRadarPerformance, getLabel } from "../services/mock/mockApi";
-import { useSportSeeAPi } from '../../services/useSportSeeApi';
+import { useSportSeeAPi, getDefaultActivities } from '../../services/useSportSeeApi';
 
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 
@@ -14,6 +14,11 @@ export default function RadarPerf({ userId }) {
     // const dataReverse = [...dataWithLabel].reverse();
     const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}/performance`);
     let performance = data
+
+
+    if (error || isLoading) {
+        performance = getDefaultActivities();
+    }
     return (
         <StyledRadarPerf>
             <ResponsiveContainer width="100%" height="100%">
@@ -44,7 +49,7 @@ RadarPerf.propTypes = {
 }
 
 const StyledRadarPerf = styled.div`
-  width: 258px;
+  width: 30%;
   height: 263px;
   border-radius: 5px;
   background-color: #282D30;

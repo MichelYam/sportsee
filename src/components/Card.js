@@ -59,7 +59,6 @@ const NutriCard = styled.div`
   align-items: center;
   border-radius: 5px;
   width: 258px;
-  height: 124px;
   background-color: #FBFBFB;
   padding: 30px
 `;
