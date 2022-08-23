@@ -11,7 +11,7 @@ const activityTitleFR = {
 /**
  * extract data from SportSee API
  * @param {*} url 
- * @returns 
+ * @returns data from specific service
  */
 export const useSportSeeAPi = (url) => {
     const [data, setData] = useState({});
@@ -43,7 +43,12 @@ export const useSportSeeAPi = (url) => {
 
     return { data, isLoading, error }
 }
-
+/**
+ * calls special functions depending on service
+ * @param {String} services endpoints
+ * @param {Array.Object} data from api
+ * @returns {array.Object} 
+ */
 const getData = (services, data) => {
     switch (services) {
         case "activity":
@@ -58,7 +63,11 @@ const getData = (services, data) => {
             console.error(`${services} not found`);
     }
 }
-
+/**
+ * get user activity and transform "day" key (format: dd)
+ * @param {array.Object} data from api
+ * @returns {array.Object} 
+ */
 const getDailyActivity = (data) => {
     if (data) {
         const dailyActivity = [];
@@ -77,12 +86,21 @@ const getDailyActivity = (data) => {
     }
 }
 
+/**
+ * Tranform data change day format 
+ * @param {array.Object} data from api
+ * @returns {array.Object}
+ */
 const averageSessions = (data) => {
     const newData = data.map(a => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }))
     return newData
 }
 
-
+/**
+ * get data and change activity name
+ * @param {array.Object} data from api
+ * @returns {array.Object}
+ */
 const getRadarPerformance = (data) => {
     const newArr = [];
     for (let kind of Object.keys(activityTitleFR)) {
@@ -96,18 +114,23 @@ const getRadarPerformance = (data) => {
         }
     }
 
-    return reverseData(newArr);
-}
-const reverseData = (data) => {
-    return [...data].reverse()
+    return [...newArr].reverse();
 }
 
+/**
+ * get user information
+ * @param {array.Object} data from api
+ * @returns {array.Object}
+ */
 const getUserInfo = (data) => {
     return data.data
 }
 
 
-
+/**
+ * initialize score data of user if API not found
+ * @returns {Object}
+ */
 export const getDefaultKeyData = () => {
     return {
         calorieCount: 0,
@@ -118,17 +141,18 @@ export const getDefaultKeyData = () => {
 };
 
 /**
+ *  initialize activity data if API not found
  * @returns {array.Object} default data for activities chart
  */
- export const getDefaultActivities = () => {
+export const getDefaultActivities = () => {
     const activities = [];
-  
+
     for (let key in activityTitleFR) {
-      activities.push({
-        activity: activityTitleFR[key],
-        value: 0,
-      });
+        activities.push({
+            activity: activityTitleFR[key],
+            value: 0,
+        });
     }
-  
+
     return activities;
-  };
+};

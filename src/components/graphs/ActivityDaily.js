@@ -1,7 +1,13 @@
 import React from 'react'
-
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
+//Styled
+import styled from 'styled-components';
+
+//API
+import { useSportSeeAPi } from '../../services/useSportSeeApi';
+
+//Recharts
 import {
     BarChart,
     Bar,
@@ -13,12 +19,10 @@ import {
     ResponsiveContainer
 } from "recharts";
 
-// import { getDailyActivityByID } from "../services/mock/mockApi";
-import { useSportSeeAPi } from '../../services/useSportSeeApi';
 
 export default function ActivityDaily({ userId }) {
-
     const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}/activity`);
+
     const activityData = data
 
     return (

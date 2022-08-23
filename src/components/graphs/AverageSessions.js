@@ -1,11 +1,13 @@
 import React from 'react'
-// styled
-import styled from "styled-components";
 import PropTypes from 'prop-types';
 
-// import { averageSessions } from "../services/mock/mockApi";
+// styled
+import styled from "styled-components";
+
+//API
 import { useSportSeeAPi } from '../../services/useSportSeeApi';
 
+//Recharts
 import {
     LineChart,
     XAxis,
@@ -16,10 +18,8 @@ import {
 } from "recharts";
 
 export default function AverageSessions({ userId }) {
-    // const data = averageSessions(userId)
-
     const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}/average-sessions`);
-    // const activityData = data
+    
     let averageData = data
     return (
         <StylesAverageSession>
@@ -60,6 +60,7 @@ export default function AverageSessions({ userId }) {
 }
 
 const CustomTooltip = ({ active, payload }) => {
+    console.log(typeof (active), typeof (payload))
     if (active && payload) {
         return <StyledCustomTooltip>{`${payload[0].value} min`}</StyledCustomTooltip >;
     }

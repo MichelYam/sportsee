@@ -1,14 +1,14 @@
 import React from 'react'
-
-import styled from 'styled-components';
 import PropTypes from "prop-types"
 
+//Styled
+import styled from 'styled-components';
+
+//Recharts
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
-// import { getScoreOfUser } from '../services/mock/mockApi';
-
+//API
 import { useSportSeeAPi } from '../../services/useSportSeeApi';
-
 
 export default function Score({ userId }) {
     const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}`);

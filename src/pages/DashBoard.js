@@ -10,12 +10,15 @@ import ActivityDaily from '../components/graphs/ActivityDaily';
 import RadarPerf from '../components/graphs/RadarPerf';
 import Score from '../components/graphs/Score';
 
+//Styled
 import styled from 'styled-components';
 
+//API
 import { useSportSeeAPi } from '../services/useSportSeeApi';
 
 export default function DashBoard() {
     const { userId } = useParams();
+
     const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}`);
     return (
         <StyledDashboard>

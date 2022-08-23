@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const DATA_BY_TYPE = {
+const DATA_TYPE = {
   Calories: {
     icon: "../assets/logo/calorie-icon.png",
     bgColor: "rgba(255, 0, 0, 0.1)",
@@ -39,10 +39,10 @@ export default function Card({ type, value }) {
   return (
     <NutriCard>
       <NutriCardImgContent>
-        <NutriCardImg src={DATA_BY_TYPE[type].icon} alt={type} />
+        <NutriCardImg src={DATA_TYPE[type].icon} alt={type} />
       </NutriCardImgContent>
       <NutriCardContent>
-        <NutriCardContentValue>{valueSemicolon(value)}{DATA_BY_TYPE[type].unit}</NutriCardContentValue>
+        <NutriCardContentValue>{valueSemicolon(value)}{DATA_TYPE[type].unit}</NutriCardContentValue>
         <NutriCardContentType>{type}</NutriCardContentType>
       </NutriCardContent>
     </NutriCard>
