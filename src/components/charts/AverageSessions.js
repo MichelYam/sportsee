@@ -60,7 +60,6 @@ export default function AverageSessions({ userId }) {
 }
 
 const CustomTooltip = ({ active, payload }) => {
-    console.log(typeof (active), typeof (payload))
     if (active && payload) {
         return <StyledCustomTooltip>{`${payload[0].value} min`}</StyledCustomTooltip >;
     }
