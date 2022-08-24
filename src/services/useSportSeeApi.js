@@ -126,20 +126,6 @@ const getUserInfo = (data) => {
     return data.data
 }
 
-
-/**
- * initialize score data of user if API not found
- * @returns {Object}
- */
-export const getDefaultKeyData = () => {
-    return {
-        calorieCount: 0,
-        proteinCount: 0,
-        carbohydrateCount: 0,
-        lipidCount: 0,
-    };
-};
-
 /**
  *  initialize activity data if API not found
  * @returns {array.Object} default data for activities chart

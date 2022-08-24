@@ -3,30 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const DATA_TYPE = {
-  Calories: {
-    icon: "../assets/logo/calorie-icon.png",
-    bgColor: "rgba(255, 0, 0, 0.1)",
-    unit: "kCal"
-  },
-  Glucides: {
-    icon: "../assets/logo/carbohydrate-icon.png",
-    bgColor: "rgba(253, 204, 12, 0.1)",
-    unit: "g"
-  },
-  Proteines: {
-    icon: "../assets/logo/protein-icon.png",
-    bgColor: "rgba(74, 184, 255, 0.1)",
-    unit: "g"
-  },
-  Lipides: {
-    icon: "../assets/logo/lipid-icon.png",
-    bgColor: "rgba(253, 81, 129, 0.1)",
-    unit: "g"
-  }
-}
-
-export default function Card({ type, value }) {
+export default function Card({ type, value, icon, unit }) {
   const valueSemicolon = (data) => {
     const value = data.toString();
 
@@ -39,10 +16,10 @@ export default function Card({ type, value }) {
   return (
     <NutriCard>
       <NutriCardImgContent>
-        <NutriCardImg src={DATA_TYPE[type].icon} alt={type} />
+        <NutriCardImg src={icon} alt={type} />
       </NutriCardImgContent>
       <NutriCardContent>
-        <NutriCardContentValue>{valueSemicolon(value)}{DATA_TYPE[type].unit}</NutriCardContentValue>
+        <NutriCardContentValue>{valueSemicolon(value)}{unit}</NutriCardContentValue>
         <NutriCardContentType>{type}</NutriCardContentType>
       </NutriCardContent>
     </NutriCard>
@@ -51,7 +28,9 @@ export default function Card({ type, value }) {
 
 Card.propTypes = {
   type: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired
+  value: PropTypes.number.isRequired,
+  icon: PropTypes.string.isRequired,
+  unit: PropTypes.string.isRequired,
 }
 
 const NutriCard = styled.div`

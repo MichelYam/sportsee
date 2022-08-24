@@ -20,7 +20,7 @@ export default function DashBoard() {
     const { userId } = useParams();
 
     const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}`);
-    
+
     return (
         <StyledDashboard>
             <Header />
