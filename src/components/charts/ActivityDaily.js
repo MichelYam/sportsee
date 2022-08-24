@@ -19,7 +19,6 @@ import {
     ResponsiveContainer
 } from "recharts";
 
-
 export default function ActivityDaily({ userId }) {
     const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}/activity`);
 

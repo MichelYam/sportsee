@@ -11,17 +11,17 @@ const activityTitleFR = {
     3: "Endurance",
     4: "Force",
     5: "Vitesse",
-    6: "Itensité",
+    6: "Intensité",
 };
 
 export function getUserById(userId) {
-    const user = USER_MAIN_DATA.find((elem) => elem.id == userId)
+    const user = USER_MAIN_DATA.find((elem) => elem.id === parseInt(userId))
     return user
 }
 
 
 export function getDailyActivityByID(userId) {
-    const userActivity = USER_ACTIVITY.find((elem) => elem.userId == userId)
+    const userActivity = USER_ACTIVITY.find((elem) => elem.userId === parseInt(userId))
     const test = refactorData(userActivity)
     // console.log(test)
     return test
@@ -47,13 +47,13 @@ function refactorData(data) {
 }
 
 export function averageSessions(userId) {
-    const data = USER_AVERAGE_SESSIONS.find((elem) => elem.userId == userId)
+    const data = USER_AVERAGE_SESSIONS.find((elem) => elem.userId === parseInt(userId))
     return data.sessions
 }
 
 
 export function getRadarPerformance(userId) {
-    const data = USER_PERFORMANCE.find((elem) => elem.userId == userId);
+    const data = USER_PERFORMANCE.find((elem) => elem.userId === parseInt(userId));
     return data
 }
 

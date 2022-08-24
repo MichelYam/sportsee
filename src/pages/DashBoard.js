@@ -5,10 +5,10 @@ import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import SideBar from '../components/SideBar';
 import ListCard from '../components/ListCard'
-import AverageSessions from '../components/graphs/AverageSessions';
-import ActivityDaily from '../components/graphs/ActivityDaily';
-import RadarPerf from '../components/graphs/RadarPerf';
-import Score from '../components/graphs/Score';
+import AverageSessions from '../components/charts/AverageSessions';
+import ActivityDaily from '../components/charts/ActivityDaily';
+import RadarPerf from '../components/charts/RadarPerf';
+import Score from '../components/charts/Score';
 
 //Styled
 import styled from 'styled-components';
@@ -20,6 +20,7 @@ export default function DashBoard() {
     const { userId } = useParams();
 
     const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}`);
+    
     return (
         <StyledDashboard>
             <Header />
