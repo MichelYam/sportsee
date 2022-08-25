@@ -1,3 +1,5 @@
+[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
+
 # Project 12 - Front-end Dashboard
 Développez un tableau de bord d'analytics avec React
 
@@ -12,3 +14,6 @@ Développez un tableau de bord d'analytics avec React
 - Cloner le réportoire sur votre ordinateur
 - Installer les dépendances du projet en utilisant la commande suivante `npm install`
 - Utiliser la commande `npm start` pour lancer le projet
+
+### Back-End
+Il suffit d'utiliser la commande `git clone https://github.com/MichelYam/P12-back-end-dashboard.git`
