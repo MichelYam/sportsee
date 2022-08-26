@@ -1,16 +1,24 @@
 import React from 'react'
-
+//Styled
 import styled from 'styled-components';
 
+//Component
 import Card from './Card';
 
+//API
 import { useSportSeeAPi } from '../services/useSportSeeApi';
 
 
-
+/**
+ * 
+ * @param {*} param
+ * @returns 
+ */
 export default function ListCard({ userId }) {
     const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}`);
+
     let { keyData } = data
+    // const userData = userModel(data)
     return (
         <DashBoardNutri>
             {isLoading || error ? "Loading..." : <>

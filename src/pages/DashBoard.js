@@ -16,6 +16,10 @@ import styled from 'styled-components';
 //API
 import { useSportSeeAPi } from '../services/useSportSeeApi';
 
+/**
+ * 
+ * @returns 
+ */
 export default function DashBoard() {
     const { userId } = useParams();
 

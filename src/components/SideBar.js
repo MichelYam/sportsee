@@ -1,6 +1,12 @@
 import React from 'react';
 
+//styled
 import styled from 'styled-components';
+
+/**
+ * 
+ * @returns 
+ */
 export default function SideBar() {
     return (
         <StyledSideBar>

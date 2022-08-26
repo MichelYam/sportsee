@@ -8,6 +8,7 @@ const activityTitleFR = {
     5: "Vitesse",
     6: "Intensité",
 };
+
 /**
  * extract data from SportSee API
  * @param {*} url 
@@ -43,6 +44,7 @@ export const useSportSeeAPi = (url) => {
 
     return { data, isLoading, error }
 }
+
 /**
  * calls special functions depending on service
  * @param {String} services endpoints
@@ -63,6 +65,7 @@ const getData = (services, data) => {
             console.error(`${services} not found`);
     }
 }
+
 /**
  * get user activity and transform "day" key (format: dd)
  * @param {array.Object} data from api
