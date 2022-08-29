@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
 //API
-import { useSportSeeAPi } from '../../services/useSportSeeApi';
+import { useSportSeeAPi } from '../../../services/useSportSeeApi';
 
 export default function Score({ userId }) {
     const { data, isLoading, error } = useSportSeeAPi("keyData", userId);

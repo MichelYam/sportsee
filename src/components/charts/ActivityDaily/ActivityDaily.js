@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 //API
-import { useSportSeeAPi } from '../../services/useSportSeeApi';
+import { useSportSeeAPi } from '../../../services/useSportSeeApi';
 
 //Recharts
 import {
@@ -19,7 +19,7 @@ import {
     ResponsiveContainer
 } from "recharts";
 
-import { UserContext } from '../../pages/DashBoard';
+import { UserContext } from '../../../pages/DashBoard/DashBoard';
 
 export default function ActivityDaily() {
     const value = useContext(UserContext);

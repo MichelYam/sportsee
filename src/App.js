@@ -1,6 +1,6 @@
 
 import './App.css';
-import DashBoard from './pages/DashBoard';
+import DashBoard from './pages/DashBoard/DashBoard';
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 function App() {

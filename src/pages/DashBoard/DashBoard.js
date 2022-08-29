@@ -2,20 +2,18 @@ import React, { createContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 //Components
-import Header from '../components/Header';
-import SideBar from '../components/SideBar';
-import ListCard from '../components/ListCard'
-import AverageSessions from '../components/charts/AverageSessions';
-import ActivityDaily from '../components/charts/ActivityDaily';
-import RadarPerf from '../components/charts/RadarPerf';
-import Score from '../components/charts/Score';
+import Header from '../../components/Header/Header';
+import SideBar from '../../components/SideBar/SideBar';
+import ListCard from '../../components/ListCard/ListCard';
+import ActivityDaily from '../../components/charts/ActivityDaily/ActivityDaily';
+import AverageSessions from '../../components/charts/AverrageSession/AverageSessions';
+import RadarPerf from '../../components/charts/RadarPerf/RadarPerf';
+import Score from '../../components/charts/Score/Score';
 
-// //Styled
-// import styled from 'styled-components';
+import { StyledDashboard, Content, Title, TitleSpan, MsgCongrat, Dashboard, DashBoardColumn, DashBoardBottom } from './style.js';
 
-import { StyledDashboard, Content, Title, TitleSpan, MsgCongrat, Dashboard, DashBoardColumn, DashBoardBottom } from './DashBoard/style.js';
 //API
-import { useSportSeeAPi } from '../services/useSportSeeApi';
+import { useSportSeeAPi } from '../../services/useSportSeeApi';
 
 /**
  * 

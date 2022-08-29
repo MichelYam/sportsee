@@ -3,10 +3,10 @@ import React from 'react'
 import styled from 'styled-components';
 
 //Component
-import Card from './Card';
+import Card from '../Card/Card';
 
 //API
-import { useSportSeeAPi } from '../services/useSportSeeApi';
+import { useSportSeeAPi } from '../../services/useSportSeeApi';
 
 
 /**

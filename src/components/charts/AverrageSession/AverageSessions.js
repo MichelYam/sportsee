@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styled from "styled-components";
 
 //API
-import { useSportSeeAPi } from '../../services/useSportSeeApi';
+import { useSportSeeAPi } from '../../../services/useSportSeeApi';
 
 //Recharts
 import {
