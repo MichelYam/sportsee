@@ -18,7 +18,7 @@ import {
 } from "recharts";
 
 export default function AverageSessions({ userId }) {
-    const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}/average-sessions`);
+    const { data, isLoading, error } = useSportSeeAPi("average-sessions", userId);
 
     let averageData = data
     return (

@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { userModel } from "./models";
+
+const baseUrl = "http://localhost:3030";
 
 const activityTitleFR = {
     1: "Cardio",
@@ -14,24 +17,25 @@ const activityTitleFR = {
  * @param {*} url 
  * @returns data from specific service
  */
-export const useSportSeeAPi = (url) => {
+export const useSportSeeAPi = (service, userID) => {
     const [data, setData] = useState({});
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
+    const endpoint = getEndPoints(service, userID);
+
     useEffect(() => {
-        if (!url) return
-        const services = url.split('/')[5] ? url.split('/')[5] : "userInfo"
+        if (!endpoint) return
         setLoading(true);
         const fetchData = async () => {
             try {
+                const url = `${baseUrl}/${endpoint}`;
                 const response = await fetch(url);
                 const data = await response.json();
-                const newData = getData(services, data);
+                const newData = getData(service, data);
                 setData(newData);
 
             } catch (error) {
-                console.log(error);
                 setError(true);
             }
             finally {
@@ -40,11 +44,25 @@ export const useSportSeeAPi = (url) => {
         }
         fetchData();
 
-    }, [url])
-
+    }, [service, userID, endpoint])
     return { data, isLoading, error }
 }
-
+const getEndPoints = (service, userID) => {
+    switch (service) {
+        case "activity":
+            return `user/${userID}/activity`;
+        case "average-sessions":
+            return `user/${userID}/average-sessions`;
+        case "performance":
+            return `user/${userID}/performance`;
+        case "userInfo":
+            return `user/${userID}`;
+        case "keyData":
+            return `user/${userID}`;
+        default:
+            console.error(`${service} not found`);
+    }
+}
 /**
  * calls special functions depending on service
  * @param {String} services endpoints
@@ -61,6 +79,8 @@ const getData = (services, data) => {
             return getRadarPerformance(data.data.data);
         case "userInfo":
             return getUserInfo(data);
+        case "keyData":
+            return getUserkeyData(data);
         default:
             console.error(`${services} not found`);
     }
@@ -77,7 +97,7 @@ const getDailyActivity = (data) => {
 
         for (let item of data.sessions) {
 
-            const [dd] = item.day.split("-");
+            const [yyyy, mm, dd] = item.day.split("-");
 
             dailyActivity.push({
                 day: `${dd}`,
@@ -126,9 +146,11 @@ const getRadarPerformance = (data) => {
  * @returns {array.Object}
  */
 const getUserInfo = (data) => {
+    return userModel(data.data.userInfos)
+}
+const getUserkeyData = (data) => {
     return data.data
 }
-
 /**
  *  initialize activity data if API not found
  * @returns {array.Object} default data for activities chart

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types';
 
 //Styled
@@ -19,8 +19,11 @@ import {
     ResponsiveContainer
 } from "recharts";
 
-export default function ActivityDaily({ userId }) {
-    const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}/activity`);
+import { UserContext } from '../../pages/DashBoard';
+
+export default function ActivityDaily() {
+    const value = useContext(UserContext);
+    const { data, isLoading, error } = useSportSeeAPi("activity", value);
 
     const activityData = data
 
@@ -68,12 +71,12 @@ const CustomTooltip = ({ active, payload, label }) => {
     return null;
 };
 
-ActivityDaily.propTypes = {
-    userId: PropTypes.string.isRequired,
-}
+// ActivityDaily.propTypes = {
+//     userId: PropTypes.string.isRequired,
+// }
 
 const StyledAcitivtyDaily = styled.div`
-height: 263px;
+height: 320px;
 background-color: #FBFBFB;
 box-shadow: rgba(0, 0, 0, 0.0212);
 `;

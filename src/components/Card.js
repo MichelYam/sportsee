@@ -40,6 +40,9 @@ const NutriCard = styled.div`
   width: 258px;
   background-color: #FBFBFB;
   padding: 30px
+  // @media only screen and (max-width: 1100px){
+  //   width: 200px
+  // }
 `;
 
 const NutriCardImgContent = styled.div`

@@ -11,7 +11,7 @@ import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 import { useSportSeeAPi } from '../../services/useSportSeeApi';
 
 export default function Score({ userId }) {
-    const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}`);
+    const { data, isLoading, error } = useSportSeeAPi("keyData", userId);
 
     let score = data.todayScore || data.score
     if (error || isLoading) {

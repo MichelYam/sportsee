@@ -15,7 +15,7 @@ import { useSportSeeAPi } from '../services/useSportSeeApi';
  * @returns 
  */
 export default function ListCard({ userId }) {
-    const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}`);
+    const { data, isLoading, error } = useSportSeeAPi("keyData", userId);
 
     let { keyData } = data
     // const userData = userModel(data)
@@ -35,4 +35,10 @@ const DashBoardNutri = styled.div`
 display: flex;
 flex-direction: column;
 justify-content: space-between;
+@media only screen and (max-width: 1100px){
+    flex-direction: row;
+    gap: 20px;
+    justify-content: left;
+    flex-wrap: wrap;
+}
 `;

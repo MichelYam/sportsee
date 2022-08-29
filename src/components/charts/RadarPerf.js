@@ -11,15 +11,16 @@ import { useSportSeeAPi } from '../../services/useSportSeeApi';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
 
 export default function RadarPerf({ userId }) {
-    const { data, isLoading, error } = useSportSeeAPi(`http://localhost:3030/user/${userId}/performance`);
+    const { data, isLoading, error } = useSportSeeAPi(`performance`, userId);
 
     let performance = data
+    
     return (
         <>
             {isLoading || error ? "Loading... " :
                 <StyledRadarPerf>
                     <ResponsiveContainer width="100%" height="100%">
-                        <RadarChart cx="50%" cy="50%" outerRadius="70%" data={performance}>
+                        <RadarChart cx="50%" cy="50%" outerRadius="60%" data={performance}>
                             <PolarGrid radialLines={false} />
                             <PolarAngleAxis dataKey="kind"
                                 stroke="white"
