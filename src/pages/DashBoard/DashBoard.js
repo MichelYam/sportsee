@@ -1,5 +1,5 @@
-import React, { createContext } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, createContext } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 //Components
 import Header from '../../components/Header/Header';
@@ -20,11 +20,21 @@ import { useSportSeeAPi } from '../../services/useSportSeeApi';
  * @returns 
  */
 
- export const UserContext = createContext('Unknown');
+export const UserContext = createContext('Unknown');
 
 export default function DashBoard() {
     const { userId } = useParams();
     const { data, isLoading, error } = useSportSeeAPi("userInfo", userId);
+    const navigate = useNavigate()
+    
+    useEffect(() => {
+        const currentID = localStorage.getItem('user');
+        if (currentID === null || currentID !== userId) {
+            console.log("tu n'as pas les permissions")
+            navigate(`/dashboard/${currentID}`)
+        }
+    }, [userId]);
+
 
     return (
         <UserContext.Provider value={userId}>
@@ -33,7 +43,7 @@ export default function DashBoard() {
                 <SideBar />
                 <Content>
                     {
-                        error ? "Utilisateur introuvable" : isLoading ? "Loading..." :
+                        error ? "API not working or user not found " : isLoading ? "Loading..." :
                             <>
                                 <Title>Bonjour <TitleSpan>{!isLoading && data.firstName}</TitleSpan></Title>
                                 <MsgCongrat>Félicitation ! Vous avez explosé vos objectifs hier 👏</MsgCongrat>
