@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
+
 //Styled
-import styled from 'styled-components';
+import { DashBoardNutri } from './style';
 
 //Component
 import Card from '../Card/Card';
 
 //API
 import { useSportSeeAPi } from '../../services/useSportSeeApi';
-
 
 /**
  * 
@@ -30,15 +30,3 @@ export default function ListCard({ userId }) {
         </DashBoardNutri>
     )
 }
-
-const DashBoardNutri = styled.div`
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-@media only screen and (max-width: 1100px){
-    flex-direction: row;
-    gap: 20px;
-    justify-content: left;
-    flex-wrap: wrap;
-}
-`;

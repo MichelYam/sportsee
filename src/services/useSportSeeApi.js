@@ -47,6 +47,7 @@ export const useSportSeeAPi = (service, userID) => {
     }, [service, userID, endpoint])
     return { data, isLoading, error }
 }
+
 const getEndPoints = (service, userID) => {
     switch (service) {
         case "activity":
@@ -63,6 +64,7 @@ const getEndPoints = (service, userID) => {
             console.error(`${service} not found`);
     }
 }
+
 /**
  * calls special functions depending on service
  * @param {String} services endpoints
@@ -146,8 +148,10 @@ const getRadarPerformance = (data) => {
  * @returns {array.Object}
  */
 const getUserInfo = (data) => {
+    console.log(data)
     return userModel(data.data.userInfos)
 }
+
 const getUserkeyData = (data) => {
     return data.data
 }

@@ -1,8 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react';
 import PropTypes from 'prop-types';
-
-//Styled
-import styled from 'styled-components';
 
 //API
 import { useSportSeeAPi } from '../../../services/useSportSeeApi';
@@ -19,11 +16,12 @@ import {
     ResponsiveContainer
 } from "recharts";
 
-import { UserContext } from '../../../pages/DashBoard/DashBoard';
+//Styles
+import { StyledAcitivtyDaily, TitleDailyActivity, CustomTooltipItem, CustomTooltipContainer } from './style';
 
-export default function ActivityDaily() {
-    const value = useContext(UserContext);
-    const { data, isLoading, error } = useSportSeeAPi("activity", value);
+export default function ActivityDaily({ userId }) {
+
+    const { data, isLoading, error } = useSportSeeAPi("activity", userId);
 
     const activityData = data
 
@@ -71,36 +69,6 @@ const CustomTooltip = ({ active, payload, label }) => {
     return null;
 };
 
-// ActivityDaily.propTypes = {
-//     userId: PropTypes.string.isRequired,
-// }
-
-const StyledAcitivtyDaily = styled.div`
-height: 320px;
-background-color: #FBFBFB;
-box-shadow: rgba(0, 0, 0, 0.0212);
-`;
-
-const TitleDailyActivity = styled.p`
-position: absolute;
-margin: 0;
-margin-left: 25px;
-margin-top: 20px;
-font-size: 15px;
-font-weight: bold;
-color: #20253A;
-`;
-
-const CustomTooltipContainer = styled.div`
-background-color: #FF0101;
-border: 2px solid #FF0101;
-text-align: center;
-`;
-
-const CustomTooltipItem = styled.div`
-padding: 0.75rem;
-margin: 0;
-color: white;
-font-size: 0.7rem;
-font-weight: 500;
-`;
+ActivityDaily.propTypes = {
+    userId: PropTypes.string.isRequired,
+}

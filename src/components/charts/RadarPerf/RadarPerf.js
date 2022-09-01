@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 //Styled
-import styled from 'styled-components';
+import { StyledRadarPerf } from './style';
 
 //API
 import { useSportSeeAPi } from '../../../services/useSportSeeApi';
@@ -14,7 +14,7 @@ export default function RadarPerf({ userId }) {
     const { data, isLoading, error } = useSportSeeAPi(`performance`, userId);
 
     let performance = data
-    
+
     return (
         <>
             {isLoading || error ? "Loading... " :
@@ -48,11 +48,3 @@ RadarPerf.propTypes = {
     userId: PropTypes.string.isRequired,
 }
 
-const StyledRadarPerf = styled.div`
-  width: 30%;
-  height: 263px;
-  border-radius: 5px;
-  background-color: #282D30;
-  overflow: hidden;
-  padding: 9px;
-  `;

@@ -1,10 +1,19 @@
 //Models
 export const userModel = (data) => {
-    console.log()
     return {
-        firstName: data.firstName,
-        lastName: data.lastName,
-        age: data.age,
+        // id: data.id,
+        // keyData: {
+        //     calorieCount: data.keyData.calorieCount,
+        //     carbohydrateCount: data.keyData.carbohydrateCount,
+        //     lipidCount: data.keyData.lipidCount,
+        //     proteinCount: data.keyData.proteinCount,
+        // },
+        // todayScore: data.todayScore?? data?.score,
+        // userInfo: {
+        //     firstName: data.firstName,
+        //     lastName: data.lastName,
+        //     age: data.age,
+        // }
     }
 }
 
@@ -17,3 +26,15 @@ export const userKeyDataModel = (data) => {
         lipidCount: data.lipidCount,
     }
 }
+
+export const activitiesModel = (data) =>{
+    return {
+
+    }
+}
+
+//perf
+
+//sessions
+
+//acitivty
