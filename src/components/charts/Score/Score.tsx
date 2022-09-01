@@ -1,8 +1,5 @@
-import React from 'react'
-import PropTypes from "prop-types"
-
-//Styled
-import styled from 'styled-components';
+import React from 'react';
+import PropTypes from "prop-types";
 
 //Recharts
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
@@ -10,7 +7,10 @@ import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 //API
 import { useSportSeeAPi } from '../../../services/useSportSeeApi';
 
+import { StyledScore, ScoreTitle, ScoreContent, ScoreValue, ScoreValueText } from "./style";
+
 export default function Score({ userId }) {
+
     const { data, isLoading, error } = useSportSeeAPi("keyData", userId);
 
     let score = data.todayScore || data.score
@@ -63,41 +63,3 @@ Score.propTypes = {
     userId: PropTypes.string.isRequired
 }
 
-const StyledScore = styled.div`
-width: 30%;
-height: 263px;
-border-radius: 5px;
-overflow: hidden;
-position: relative;
-background: #FBFBFB;
-box-shadow: rgba(0, 0, 0, 0.0212);
-`;
-
-const ScoreTitle = styled.h2`
-position: absolute;
-top: 10%;
-left: 10%;
-font-weight: 500;
-font-size: 15px;
-line-height: 24px;
-`;
-const ScoreContent = styled.div`
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background: #ffffff;
-`;
-const ScoreValue = styled.p`
-font-family: 'Roboto', sans-serif;
-font-weight: 700;
-font-size: 26px;
-color: #282D30;
-`
-const ScoreValueText = styled.p`
-font-family: 'Roboto', sans-serif;
-font-weight: 700;
-font-size: 14px;
-color: rgba(116, 121, 140, 1);
-margin-top: 5px;
-`

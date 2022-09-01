@@ -1,5 +1,6 @@
+import { array } from "prop-types";
 import { useEffect, useState } from "react";
-import { userModel } from "./models";
+import { userModel } from "./models/index";
 
 const baseUrl = "http://localhost:3030";
 
@@ -11,13 +12,26 @@ const activityTitleFR = {
     5: "Vitesse",
     6: "Intensité",
 };
+// const activityTitleFR : ActivityTitleFR = {
+//     1: "Cardio",
+//     2: "Energie",
+//     3: "Endurance",
+//     4: "Force",
+//     5: "Vitesse",
+//     6: "Intensité",
+// };
+// interface ActivityTitleFR {
+//     name: string;
+//   }
+
 
 /**
- * extract data from SportSee API
- * @param {*} url 
- * @returns data from specific service
+ * 
+ * @param service 
+ * @param userID 
+ * @returns 
  */
-export const useSportSeeAPi = (service, userID) => {
+export const useSportSeeAPi = (service: string, userID: string) => {
     const [data, setData] = useState({});
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -47,6 +61,7 @@ export const useSportSeeAPi = (service, userID) => {
     }, [service, userID, endpoint])
     return { data, isLoading, error }
 }
+
 const getEndPoints = (service, userID) => {
     switch (service) {
         case "activity":
@@ -69,10 +84,10 @@ const getEndPoints = (service, userID) => {
  * @param {Array.Object} data from api
  * @returns {array.Object} 
  */
-const getData = (services, data) => {
-    switch (services) {
+const getData = (service, data) => {
+    switch (service) {
         case "activity":
-            return getDailyActivity(data.data);
+            return getDailyActivity(data.data.sessions);
         case "average-sessions":
             return averageSessions(data.data.sessions);
         case "performance":
@@ -82,20 +97,46 @@ const getData = (services, data) => {
         case "keyData":
             return getUserkeyData(data);
         default:
-            console.error(`${services} not found`);
+            console.error(`${service} not found`);
     }
 }
+
+
 
 /**
  * get user activity and transform "day" key (format: dd)
  * @param {array.Object} data from api
  * @returns {array.Object} 
  */
-const getDailyActivity = (data) => {
-    if (data) {
-        const dailyActivity = [];
+// const getDailyActivity = (data) => {
+//     if (data) {
+//         const dailyActivity = [];
 
-        for (let item of data.sessions) {
+//         for (let item of data.sessions) {
+
+//             const [yyyy, mm, dd] = item.day.split("-");
+
+//             dailyActivity.push({
+//                 day: `${dd}`,
+//                 kilogram: item.kilogram,
+//                 calories: item.calories,
+//             });
+//         }
+//         return dailyActivity;
+//     }
+// }
+
+interface Activity {
+    day: string,
+    kilogram: number,
+    calories: number,
+}
+
+const getDailyActivity = (activity: Activity) => {
+    if (activity) {
+        const dailyActivity: object[] = [];
+
+        for (let item of Object.assign(activity)) {
 
             const [yyyy, mm, dd] = item.day.split("-");
 
@@ -108,6 +149,7 @@ const getDailyActivity = (data) => {
         return dailyActivity;
     }
 }
+
 
 /**
  * Tranform data change day format 
@@ -149,7 +191,7 @@ const getUserInfo = (data) => {
     return userModel(data.data.userInfos)
 }
 const getUserkeyData = (data) => {
-    return data.data
+    return data.data.keyData;
 }
 /**
  *  initialize activity data if API not found

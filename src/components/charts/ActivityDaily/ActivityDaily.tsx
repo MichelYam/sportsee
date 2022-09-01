@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types';
 
 //Styled
-import styled from 'styled-components';
+import { StyledAcitivtyDaily, TitleDailyActivity, CustomTooltipItem, CustomTooltipContainer } from './style';
 
 //API
 import { useSportSeeAPi } from '../../../services/useSportSeeApi';
@@ -16,14 +16,18 @@ import {
     CartesianGrid,
     Tooltip,
     Legend,
-    ResponsiveContainer
+    ResponsiveContainer,
+    TooltipProps
 } from "recharts";
 
-import { UserContext } from '../../../pages/DashBoard/DashBoard';
+import {
+    ValueType,
+    NameType,
+} from 'recharts/src/component/DefaultTooltipContent';
 
-export default function ActivityDaily() {
-    const value = useContext(UserContext);
-    const { data, isLoading, error } = useSportSeeAPi("activity", value);
+export default function ActivityDaily({userId}) {
+
+    const { data, isLoading, error } = useSportSeeAPi("activity", userId);
 
     const activityData = data
 
@@ -58,7 +62,7 @@ export default function ActivityDaily() {
     )
 }
 
-const CustomTooltip = ({ active, payload, label }) => {
+const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
     if (active && payload && payload.length) {
         return (
             <CustomTooltipContainer>
@@ -71,36 +75,6 @@ const CustomTooltip = ({ active, payload, label }) => {
     return null;
 };
 
-// ActivityDaily.propTypes = {
-//     userId: PropTypes.string.isRequired,
-// }
-
-const StyledAcitivtyDaily = styled.div`
-height: 320px;
-background-color: #FBFBFB;
-box-shadow: rgba(0, 0, 0, 0.0212);
-`;
-
-const TitleDailyActivity = styled.p`
-position: absolute;
-margin: 0;
-margin-left: 25px;
-margin-top: 20px;
-font-size: 15px;
-font-weight: bold;
-color: #20253A;
-`;
-
-const CustomTooltipContainer = styled.div`
-background-color: #FF0101;
-border: 2px solid #FF0101;
-text-align: center;
-`;
-
-const CustomTooltipItem = styled.div`
-padding: 0.75rem;
-margin: 0;
-color: white;
-font-size: 0.7rem;
-font-weight: 500;
-`;
+ActivityDaily.propTypes = {
+    userId: PropTypes.string.isRequired,
+}

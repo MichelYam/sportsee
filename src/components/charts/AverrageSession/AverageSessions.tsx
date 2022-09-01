@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
 import PropTypes from 'prop-types';
 
 // styled
-import styled from "styled-components";
+import { StyledCustomTooltip, StylesAverageSession, AverageSessionSpan, AverageSessionTitle } from './style'
 
 //API
 import { useSportSeeAPi } from '../../../services/useSportSeeApi';
@@ -17,7 +18,8 @@ import {
     ResponsiveContainer
 } from "recharts";
 
-export default function AverageSessions({ userId }) {
+export default function AverageSessions({userId}) {
+
     const { data, isLoading, error } = useSportSeeAPi("average-sessions", userId);
 
     let averageData = data
@@ -72,38 +74,3 @@ const CustomTooltip = ({ active, payload }) => {
 AverageSessions.propTypes = {
     userId: PropTypes.string.isRequired,
 }
-
-const StylesAverageSession = styled.div`
-    position relative;
-    width: 30%;
-    height: 263px;
-    border-radius: 5px;
-    overflow: hidden;
-    background:red;
-`;
-
-const AverageSessionTitle = styled.h2`
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    margin: 0;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 16px;
-    font-weight: 500;
-    font-family: "Roboto", sans-serif;
-`;
-
-const AverageSessionSpan = styled.span`
-    position: absolute;
-    top: 25px;
-    left: 0px;
-`;
-
-
-const StyledCustomTooltip = styled.div`
-padding: 0.5rem;
-font-size: 0.7rem;
-font-weight: 500;
-background: #fff;
-border: 1px solid transparent;
-`;
