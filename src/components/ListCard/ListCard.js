@@ -15,10 +15,9 @@ import { useSportSeeAPi } from '../../services/useSportSeeApi';
  * @returns 
  */
 export default function ListCard({ userId }) {
-    const { data, isLoading, error } = useSportSeeAPi("keyData", userId);
-
+    const { data, isLoading, error } = useSportSeeAPi("userInfo", userId);
+    
     let { keyData } = data
-    // const userData = userModel(data)
     return (
         <DashBoardNutri>
             {isLoading || error ? "Loading..." : <>

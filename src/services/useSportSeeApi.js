@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { userModel } from "./models";
+import { userModel, performanceModel, activitiesModel, sessionsModel } from "./models";
 
 const baseUrl = "http://localhost:3030";
 
@@ -36,6 +36,7 @@ export const useSportSeeAPi = (service, userID) => {
                 setData(newData);
 
             } catch (error) {
+                console.log(error)
                 setError(true);
             }
             finally {
@@ -47,6 +48,7 @@ export const useSportSeeAPi = (service, userID) => {
     }, [service, userID, endpoint])
     return { data, isLoading, error }
 }
+
 
 const getEndPoints = (service, userID) => {
     switch (service) {
@@ -76,13 +78,11 @@ const getData = (services, data) => {
         case "activity":
             return getDailyActivity(data.data);
         case "average-sessions":
-            return averageSessions(data.data.sessions);
+            return averageSessions(data.data);
         case "performance":
-            return getRadarPerformance(data.data.data);
+            return getRadarPerformance(data.data);
         case "userInfo":
-            return getUserInfo(data);
-        case "keyData":
-            return getUserkeyData(data);
+            return getUserInfo(data.data);
         default:
             console.error(`${services} not found`);
     }
@@ -93,21 +93,14 @@ const getData = (services, data) => {
  * @param {array.Object} data from api
  * @returns {array.Object} 
  */
-const getDailyActivity = (data) => {
+export const getDailyActivity = (data) => {
     if (data) {
-        const dailyActivity = [];
-
-        for (let item of data.sessions) {
-
+        const sessions = data.sessions.map(item => {
             const [yyyy, mm, dd] = item.day.split("-");
+            return ({ ...item, day: dd })
 
-            dailyActivity.push({
-                day: `${dd}`,
-                kilogram: item.kilogram,
-                calories: item.calories,
-            });
-        }
-        return dailyActivity;
+        })
+        return activitiesModel({ ...data, sessions })
     }
 }
 
@@ -117,57 +110,33 @@ const getDailyActivity = (data) => {
  * @returns {array.Object}
  */
 const averageSessions = (data) => {
-    const newData = data.map(a => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }))
-    return newData
+    console.log(data)
+    if (data) {
+        const sessions = data.sessions.map(a => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }));
+        return sessionsModel({ ...data, sessions });
+    }
 }
 
 /**
  * get data and change activity name
  * @param {array.Object} data from api
- * @returns {array.Object}
+ * @returns {Object}
  */
 const getRadarPerformance = (data) => {
-    const newArr = [];
     for (let kind of Object.keys(activityTitleFR)) {
-        for (let item of data) {
+        for (let item of data.data) {
             if (item.kind.toString() === kind) {
-                newArr.push({
-                    kind: activityTitleFR[kind],
-                    value: item.value
-                })
+                item.kind = activityTitleFR[kind]
             }
         }
     }
-
-    return [...newArr].reverse();
+    return performanceModel(data);
 }
-
 /**
  * get user information
  * @param {array.Object} data from api
  * @returns {array.Object}
  */
 const getUserInfo = (data) => {
-    console.log(data)
-    return userModel(data.data.userInfos)
+    return userModel(data);
 }
-
-const getUserkeyData = (data) => {
-    return data.data
-}
-/**
- *  initialize activity data if API not found
- * @returns {array.Object} default data for activities chart
- */
-export const getDefaultActivities = () => {
-    const activities = [];
-
-    for (let key in activityTitleFR) {
-        activities.push({
-            activity: activityTitleFR[key],
-            value: 0,
-        });
-    }
-
-    return activities;
-};

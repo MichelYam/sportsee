@@ -21,7 +21,6 @@ import {
 export default function AverageSessions({ userId }) {
     const { data, isLoading, error } = useSportSeeAPi("average-sessions", userId);
 
-    let averageData = data
     return (
         <StylesAverageSession>
             {isLoading || error ? "Loading..." :
@@ -33,7 +32,7 @@ export default function AverageSessions({ userId }) {
                         </AverageSessionSpan>
                     </AverageSessionTitle>
                     <ResponsiveContainer width="100%" height="100%">
-                        <LineChart data={averageData} outerRadius="70%">
+                        <LineChart data={data.sessions} outerRadius="70%">
                             <Line type="monotone" dataKey="sessionLength" stroke="#FFFFFF" strokeWidth={2} dot={false} activeDot={{
                                 stroke: "rgba(255, 255, 255, 0.6)",
                                 strokeWidth: 10,

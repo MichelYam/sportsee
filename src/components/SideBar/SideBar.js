@@ -1,7 +1,7 @@
 import React from 'react';
 
 //styled
-import { StyledSideBar, SideBarMenu, SideBarMenuItemLink, SideBarMenuItemLinkBg, SideBarMenuCopyright } from 'styled-components';
+import { StyledSideBar, SideBarMenu, SideBarMenuItemLink, SideBarMenuItemLinkBg, SideBarMenuCopyright } from './style';
 
 /**
  * 

@@ -23,8 +23,6 @@ export default function ActivityDaily({ userId }) {
 
     const { data, isLoading, error } = useSportSeeAPi("activity", userId);
 
-    const activityData = data
-
     return (
         <>
             {
@@ -32,7 +30,7 @@ export default function ActivityDaily({ userId }) {
                     <StyledAcitivtyDaily>
                         <TitleDailyActivity>Activité quotidienne</TitleDailyActivity>
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart width={1000} height={350} data={activityData}
+                            <BarChart width={1000} height={350} data={data.sessions}
                                 margin={{ top: 80, right: 48, bottom: 32, left: 48 }}
                                 barGap={8}
                                 barCategoryGap="35%"

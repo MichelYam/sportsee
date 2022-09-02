@@ -23,7 +23,6 @@ export default function DashBoard() {
     const { userId } = useParams();
 
     const { data, isLoading, error } = useSportSeeAPi("userInfo", userId);
-
     // const performance = getPerfomrmance(data);
     // const ActivityDaily = getActivities(data);
     // const acitivtySession = getPerfomrmance(data);
@@ -36,18 +35,18 @@ export default function DashBoard() {
                 {
                     error ? "API not working or user not found " : isLoading ? "Loading..." :
                         <>
-                            <Title>Bonjour <TitleSpan>{!isLoading && data.firstName}</TitleSpan></Title>
+                            <Title>Bonjour <TitleSpan>{!isLoading && data.userInfos.firstName}</TitleSpan></Title>
                             <MsgCongrat>Félicitation ! Vous avez explosé vos objectifs hier 👏</MsgCongrat>
                             <Dashboard>
                                 <DashBoardColumn>
                                     <ActivityDaily userId={userId} />
                                     <DashBoardBottom>
-                                        <AverageSessions userId={userId} data={getSessions} />
-                                        <RadarPerf userId={userId} data={getRadarPerf} />
-                                        <Score userId={userId} data={getScore} />
+                                        <AverageSessions userId={userId} />
+                                        <RadarPerf userId={userId} />
+                                        <Score userId={userId} />
                                     </DashBoardBottom>
                                 </DashBoardColumn>
-                                <ListCard userId={userId} data={getCalories} />
+                                <ListCard userId={userId} />
                             </Dashboard>
                         </>
                 }

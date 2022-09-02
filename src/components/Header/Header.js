@@ -1,11 +1,9 @@
 import React from 'react';
 
-import { StyledHeader, StyledHeaderLogo, NavBar, NavBarMenu, NavBarMenuItem, NavbarMenuItemLink } from 'styled-components';
+import { StyledHeader, StyledHeaderLogo, NavBar, NavBarMenu, NavBarMenuItem, NavbarMenuItemLink } from './style';
 
 export default function Header() {
-    const handleStorage = () => {
-        localStorage.setItem("user", null)
-    }
+
     return (
         <>
             <StyledHeader>
@@ -13,7 +11,7 @@ export default function Header() {
                 <NavBar>
                     <NavBarMenu>
                         <NavBarMenuItem>
-                            <NavbarMenuItemLink href='/' onClick={() => handleStorage()}>Accueil</NavbarMenuItemLink>
+                            <NavbarMenuItemLink href='/'>Accueil</NavbarMenuItemLink>
                         </NavBarMenuItem>
                         <NavBarMenuItem>
                             <NavbarMenuItemLink href='/'>Profil</NavbarMenuItemLink>

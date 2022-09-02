@@ -20,7 +20,7 @@ export default function RadarPerf({ userId }) {
             {isLoading || error ? "Loading... " :
                 <StyledRadarPerf>
                     <ResponsiveContainer width="100%" height="100%">
-                        <RadarChart cx="50%" cy="50%" outerRadius="60%" data={performance}>
+                        <RadarChart cx="50%" cy="50%" outerRadius="60%" data={performance.data}>
                             <PolarGrid radialLines={false} />
                             <PolarAngleAxis dataKey="kind"
                                 stroke="white"
