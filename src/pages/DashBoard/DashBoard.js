@@ -42,12 +42,12 @@ export default function DashBoard() {
                                 <DashBoardColumn>
                                     <ActivityDaily userId={userId} />
                                     <DashBoardBottom>
-                                        <AverageSessions userId={userId} />
-                                        <RadarPerf userId={userId} />
-                                        <Score userId={userId} />
+                                        <AverageSessions userId={userId} data={getSessions} />
+                                        <RadarPerf userId={userId} data={getRadarPerf} />
+                                        <Score userId={userId} data={getScore} />
                                     </DashBoardBottom>
                                 </DashBoardColumn>
-                                <ListCard userId={userId} />
+                                <ListCard userId={userId} data={getCalories} />
                             </Dashboard>
                         </>
                 }
