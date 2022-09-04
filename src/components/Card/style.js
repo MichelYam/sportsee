@@ -3,7 +3,6 @@ import styled from "styled-components"
 export const NutriCard = styled.div`
 display: flex;
 align-items: center;
-justify-content: space-between;
 border-radius: 5px;
 width: 258px;
 background-color: #FBFBFB;
@@ -29,7 +28,7 @@ object-fit: cover;
 export const NutriCardContent = styled.div`
 display: flex;
 flex-direction: column;
-margin-left: 35px
+margin-left: 35px;
 @media only screen and (max-width: 1100px){
     margin: 10px 0px;
 }
