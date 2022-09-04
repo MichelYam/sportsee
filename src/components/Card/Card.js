@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 //Styles
 import { NutriCard, NutriCardImgContent, NutriCardImg, NutriCardContent, NutriCardContentValue, NutriCardContentType } from "./style";
 
+/**
+ * Creation calories card of user 
+ * @param {*} param0 
+ * @returns HTML element
+ */
 export default function Card({ type, value, icon, unit }) {
   const valueSemicolon = (data) => {
     const value = data.toString();

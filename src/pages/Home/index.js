@@ -1,13 +1,16 @@
-import React from 'react'
+import React from 'react';
 
+//Component
 import UserCard from '../../components/UserCard/index';
 
-
+//Styles
 import { StyledHome, HomeTitle, UserList } from './style';
 
 
-// import avatar from '../assets/logo/avatar.png';
-
+/**
+ * Creation home page that contain all users
+ * @returns jsx Element
+ */
 export default function index() {
     return (
         <StyledHome>

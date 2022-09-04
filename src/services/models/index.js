@@ -1,4 +1,9 @@
-//Models
+
+/**
+ * 
+ * @param {object} data 
+ * @returns 
+ */
 export const userModel = (data) => {
     return {
         id: data.id,
@@ -16,7 +21,11 @@ export const userModel = (data) => {
         }
     }
 }
-
+/**
+ * 
+ * @param {object} data 
+ * @returns 
+ */
 export const activitiesModel = (data) => {
     return {
         userId: data.userId,
@@ -24,9 +33,13 @@ export const activitiesModel = (data) => {
     }
 }
 
-//perf
+/**
+ * 
+ * @param {object} data 
+ * @returns 
+ */
 export const performanceModel = (data) => {
-    const test = {
+    return {
         userId: data.userId,
         kind: {
             1: 'cardio',
@@ -38,10 +51,13 @@ export const performanceModel = (data) => {
         },
         data: [...data.data].reverse(),
     }
-    return test
 }
 
-//sessions
+/**
+ * 
+ * @param {object} data 
+ * @returns 
+ */
 export const sessionsModel = (data) => {
     return {
         userId: data.userId,

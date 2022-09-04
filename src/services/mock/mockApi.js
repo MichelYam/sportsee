@@ -23,7 +23,6 @@ export function getUserById(userId) {
 export function getDailyActivityByID(userId) {
     const userActivity = USER_ACTIVITY.find((elem) => elem.userId === parseInt(userId))
     const test = refactorData(userActivity)
-    // console.log(test)
     return test
 }
 

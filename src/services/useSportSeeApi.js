@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+//Models
 import { userModel, performanceModel, activitiesModel, sessionsModel } from "./models";
 
 const baseUrl = "http://localhost:3030";
@@ -13,43 +13,30 @@ const activityTitleFR = {
 };
 
 /**
- * extract data from SportSee API
- * @param {*} url 
- * @returns data from specific service
+ * get data from Api
+ * @param {string} service 
+ * @param {string} userId - the id of user
+ * @returns 
  */
-export const useSportSeeAPi = (service, userID) => {
-    const [data, setData] = useState({});
-    const [isLoading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-
-    const endpoint = getEndPoints(service, userID);
-
-    useEffect(() => {
-        if (!endpoint) return
-        setLoading(true);
-        const fetchData = async () => {
-            try {
-                const url = `${baseUrl}/${endpoint}`;
-                const response = await fetch(url);
-                const data = await response.json();
-                const newData = getData(service, data);
-                setData(newData);
-
-            } catch (error) {
-                console.log(error)
-                setError(true);
-            }
-            finally {
-                setLoading(false);
-            }
-        }
-        fetchData();
-
-    }, [service, userID, endpoint])
-    return { data, isLoading, error }
+export const sportSeeAPi = async (service, userId) => {
+    const endpoint = getEndPoints(service, userId);
+    if (!endpoint) return
+    try {
+        const url = `${baseUrl}/${endpoint}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-
+/**
+ * Get url from service and id
+ * @param {*} service 
+ * @param {*} userID - the id of user
+ * @returns url
+ */
 const getEndPoints = (service, userID) => {
     switch (service) {
         case "activity":
@@ -60,40 +47,29 @@ const getEndPoints = (service, userID) => {
             return `user/${userID}/performance`;
         case "userInfo":
             return `user/${userID}`;
-        case "keyData":
-            return `user/${userID}`;
         default:
             console.error(`${service} not found`);
     }
 }
-
 /**
- * calls special functions depending on service
- * @param {String} services endpoints
- * @param {Array.Object} data from api
- * @returns {array.Object} 
+ * Get user information
+ * @param {*} service - service to recover the data
+ * @param {*} userId - the id of user
+ * @returns Object
  */
-const getData = (services, data) => {
-    switch (services) {
-        case "activity":
-            return getDailyActivity(data.data);
-        case "average-sessions":
-            return averageSessions(data.data);
-        case "performance":
-            return getRadarPerformance(data.data);
-        case "userInfo":
-            return getUserInfo(data.data);
-        default:
-            console.error(`${services} not found`);
-    }
+export const getUserInfo = async (service, userId) => {
+    const data = await sportSeeAPi(service, userId);
+    return userModel(data.data);
 }
 
 /**
- * get user activity and transform "day" key (format: dd)
- * @param {array.Object} data from api
- * @returns {array.Object} 
+ * Get daily activity of user
+ * @param {*} service - service to recover the data
+ * @param {*} userId - the id of user
+ * @returns 
  */
-export const getDailyActivity = (data) => {
+export const getDailyActivity = async (service, userId) => {
+    const { data } = await sportSeeAPi(service, userId);
     if (data) {
         const sessions = data.sessions.map(item => {
             const [yyyy, mm, dd] = item.day.split("-");
@@ -105,12 +81,13 @@ export const getDailyActivity = (data) => {
 }
 
 /**
- * Tranform data change day format 
- * @param {array.Object} data from api
- * @returns {array.Object}
+ * Get average session of user 
+ * @param {*} service - service to recover the data
+ * @param {*} userId - the id of user
+ * @returns 
  */
-const averageSessions = (data) => {
-    console.log(data)
+export const getAverageSessions = async (service, userId) => {
+    const { data } = await sportSeeAPi(service, userId);
     if (data) {
         const sessions = data.sessions.map(a => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }));
         return sessionsModel({ ...data, sessions });
@@ -118,11 +95,13 @@ const averageSessions = (data) => {
 }
 
 /**
- * get data and change activity name
- * @param {array.Object} data from api
- * @returns {Object}
+ * Get performance of user 
+ * @param {*} service - service to recover the data
+ * @param {*} userId - the id of user
+ * @returns 
  */
-const getRadarPerformance = (data) => {
+export const getRadarPerformance = async (service, userId) => {
+    const { data } = await sportSeeAPi(service, userId);
     for (let kind of Object.keys(activityTitleFR)) {
         for (let item of data.data) {
             if (item.kind.toString() === kind) {
@@ -131,12 +110,4 @@ const getRadarPerformance = (data) => {
         }
     }
     return performanceModel(data);
-}
-/**
- * get user information
- * @param {array.Object} data from api
- * @returns {array.Object}
- */
-const getUserInfo = (data) => {
-    return userModel(data);
 }

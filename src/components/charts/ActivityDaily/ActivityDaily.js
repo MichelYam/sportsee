@@ -19,18 +19,20 @@ import {
 //Styles
 import { StyledAcitivtyDaily, TitleDailyActivity, CustomTooltipItem, CustomTooltipContainer } from './style';
 
-export default function ActivityDaily({ userId }) {
-
-    const { data, isLoading, error } = useSportSeeAPi("activity", userId);
-
+/**
+ * Creation chart of the daily activities of the user
+ * @param {Object} param0 
+ * @returns HTML Element
+ */
+export default function ActivityDaily({ data }) {
     return (
         <>
             {
-                isLoading || error ? "Loading..." :
+                !data ? "Loading..." :
                     <StyledAcitivtyDaily>
                         <TitleDailyActivity>Activité quotidienne</TitleDailyActivity>
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart width={1000} height={350} data={data.sessions}
+                            <BarChart width={1000} height={350} data={data}
                                 margin={{ top: 80, right: 48, bottom: 32, left: 48 }}
                                 barGap={8}
                                 barCategoryGap="35%"
@@ -63,10 +65,9 @@ const CustomTooltip = ({ active, payload, label }) => {
             </CustomTooltipContainer>
         );
     }
-
     return null;
 };
 
 ActivityDaily.propTypes = {
-    userId: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired,
 }

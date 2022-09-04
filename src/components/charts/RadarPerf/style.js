@@ -1,7 +1,5 @@
-//Styled
+//Styles
 import styled from 'styled-components';
-
-
 
 export const StyledRadarPerf = styled.div`
   width: 30%;

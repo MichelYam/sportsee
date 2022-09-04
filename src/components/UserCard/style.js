@@ -10,7 +10,7 @@ export const UserCard = styled.div`
     margin-right: 25px;
     box-shadow: 0px 2px 5px #000;
     background-color: #E60000;
-`
+`;
 export const UserImage = styled.img`
     width: 150px;
     height: 150px;
@@ -20,7 +20,7 @@ export const UserImage = styled.img`
 
 export const UserContent = styled.p`
 color:#ffffff;
-`
+`;
 export const UserLink = styled(Link)`
     width:100%;
     text-align: center;

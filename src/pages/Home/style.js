@@ -14,7 +14,7 @@ color:#ffffff;
 
 export const HomeTitle = styled.div`
 margin-bottom: 30px;
-`
+`;
 
 export const UserList = styled.div`
 display: flex; 
