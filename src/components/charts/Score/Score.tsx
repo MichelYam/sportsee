@@ -1,33 +1,27 @@
-import React from 'react';
+import React from 'react'
 import PropTypes from "prop-types";
+
+//Styles
+import { StyledScore, ScoreTitle, ScoreContent, ScoreValue, ScoreValueText } from './style';
 
 //Recharts
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 
-//API
-import { useSportSeeAPi } from '../../../services/useSportSeeApi';
-
-import { StyledScore, ScoreTitle, ScoreContent, ScoreValue, ScoreValueText } from "./style";
-
-export default function Score({ userId }) {
-
-    const { data, isLoading, error } = useSportSeeAPi("keyData", userId);
-
-    let score = data.todayScore || data.score
-    if (error || isLoading) {
-        score = 0;
-    }
-    // const scoreUser = getScoreOfUser(userId)
-
+/**
+ * Creation chart of the user score
+ * @param {object} param0 
+ * @returns HTML Element
+ */
+export default function Score({ data }) {
     const pieData = [
         {
             name: "completed",
-            value: score,
+            value: data.todayScore,
             color: "#FF0000"
         },
         {
             name: "uncompleted",
-            value: 1 - score,
+            value: 1 - data.todayScore,
             color: "transparent"
         }
     ]
@@ -51,7 +45,7 @@ export default function Score({ userId }) {
                 </PieChart>
             </ResponsiveContainer>
             <ScoreContent>
-                <ScoreValue>{`${score * 100}%`}</ScoreValue>
+                <ScoreValue>{`${data.todayScore * 100}%`}</ScoreValue>
                 <ScoreValueText>de votre </ScoreValueText>
                 <ScoreValueText>objectif</ScoreValueText>
             </ScoreContent>
@@ -60,6 +54,5 @@ export default function Score({ userId }) {
 }
 
 Score.propTypes = {
-    userId: PropTypes.string.isRequired
+    data: PropTypes.object.isRequired
 }
-

@@ -1,52 +1,29 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from "prop-types";
 
-import PropTypes from 'prop-types';
+//Styles
+import { DashBoardNutri } from './style';
 
 //Component
 import Card from '../Card/Card';
 
-//API   
-import { useSportSeeAPi } from '../../services/useSportSeeApi';
-
-import { DashBoardNutri } from "./style"
-
-
-
-
 /**
- * 
- * @param {*} param
- * @returns 
+ * Creation list of card 
+ * @param {object} param0 
+ * @returns HTML Element
  */
-export default function ListCard({ userId }) {
-    interface KeyData {
-        calorieCount: number,
-        proteinCount: number,
-        carbohydrateCount: number,
-        lipidCount: string,
-    }
-
-    const { data, isLoading, error } = useSportSeeAPi("keyData", userId);
-
-    let userData: KeyData = {
-        calorieCount: data.calorieCount,
-        proteinCount: data.proteinCount,
-        carbohydrateCount: data.carbohydrateCount,
-        lipidCount: data.lipidCount,
-    }
+export default function ListCard({ data }) {
 
     return (
         <DashBoardNutri>
-            {isLoading || error ? "Loading..." : <>
-                <Card type="Calories" value={userData.calorieCount} icon="../assets/logo/calorie-icon.png" unit="kCal" />
-                <Card type="Proteines" value={userData.proteinCount} icon="../assets/logo/carbohydrate-icon.png" unit="g" />
-                <Card type="Glucides" value={userData.carbohydrateCount} icon="../assets/logo/protein-icon.png" unit="g" />
-                <Card type="Lipides" value={userData.lipidCount} icon="../assets/logo/lipid-icon.png" unit="g" />
-            </>}
+            <Card type="Calories" value={data.keyData.calorieCount} icon="../assets/logo/calorie-icon.png" unit="kCal" />
+            <Card type="Proteines" value={data.keyData.proteinCount} icon="../assets/logo/carbohydrate-icon.png" unit="g" />
+            <Card type="Glucides" value={data.keyData.carbohydrateCount} icon="../assets/logo/protein-icon.png" unit="g" />
+            <Card type="Lipides" value={data.keyData.lipidCount} icon="../assets/logo/lipid-icon.png" unit="g" />
         </DashBoardNutri>
     )
 }
 
 ListCard.propTypes = {
-    userId: PropTypes.string.isRequired,
+    data: PropTypes.object.isRequired
 }

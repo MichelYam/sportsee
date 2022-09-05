@@ -1,8 +1,13 @@
 import React from 'react';
 
-import { StyledHeader, StyledHeaderLogo, NavBar, NavBarMenu, NavBarMenuItem, NavbarMenuItemLink } from "./style";
+import { StyledHeader, StyledHeaderLogo, NavBar, NavBarMenu, NavBarMenuItem, NavbarMenuItemLink } from './style';
 
+/**
+ * Creation Header component
+ * @returns HTML element
+ */
 export default function Header() {
+
     return (
         <>
             <StyledHeader>

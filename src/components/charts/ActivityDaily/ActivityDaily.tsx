@@ -1,11 +1,5 @@
-import React, { useContext } from 'react'
+import React from 'react';
 import PropTypes from 'prop-types';
-
-//Styled
-import { StyledAcitivtyDaily, TitleDailyActivity, CustomTooltipItem, CustomTooltipContainer } from './style';
-
-//API
-import { useSportSeeAPi } from '../../../services/useSportSeeApi';
 
 //Recharts
 import {
@@ -16,29 +10,26 @@ import {
     CartesianGrid,
     Tooltip,
     Legend,
-    ResponsiveContainer,
-    TooltipProps
+    ResponsiveContainer
 } from "recharts";
 
-import {
-    ValueType,
-    NameType,
-} from 'recharts/src/component/DefaultTooltipContent';
+//Styles
+import { StyledAcitivtyDaily, TitleDailyActivity, CustomTooltipItem, CustomTooltipContainer } from './style';
 
-export default function ActivityDaily({userId}) {
-
-    const { data, isLoading, error } = useSportSeeAPi("activity", userId);
-
-    const activityData = data
-
+/**
+ * Creation chart of the daily activities of the user
+ * @param {Object} param0 
+ * @returns HTML Element
+ */
+export default function ActivityDaily({ data }) {
     return (
         <>
             {
-                isLoading || error ? "Loading..." :
+                !data ? "Loading..." :
                     <StyledAcitivtyDaily>
                         <TitleDailyActivity>Activité quotidienne</TitleDailyActivity>
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart width={1000} height={350} data={activityData}
+                            <BarChart width={1000} height={350} data={data}
                                 margin={{ top: 80, right: 48, bottom: 32, left: 48 }}
                                 barGap={8}
                                 barCategoryGap="35%"
@@ -62,7 +53,7 @@ export default function ActivityDaily({userId}) {
     )
 }
 
-const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
+const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
         return (
             <CustomTooltipContainer>
@@ -71,10 +62,9 @@ const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameT
             </CustomTooltipContainer>
         );
     }
-
     return null;
 };
 
 ActivityDaily.propTypes = {
-    userId: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired,
 }

@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { StyledSideBar, SideBarMenu, SideBarMenuItemLink, SideBarMenuItemLinkBg, SideBarMenuCopyright } from "./style";
+//Styles
+import { StyledSideBar, SideBarMenu, SideBarMenuItemLink, SideBarMenuItemLinkBg, SideBarMenuCopyright } from './style';
+
 /**
- * 
- * @returns 
+ * Creation sidebar
+ * @returns HTML element
  */
 export default function SideBar() {
     return (
