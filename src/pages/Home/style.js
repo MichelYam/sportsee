@@ -8,12 +8,12 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-background-color: #FF0101;
 color:#ffffff;
 `;
 
 export const HomeTitle = styled.div`
 margin-bottom: 30px;
+color: #000000;
 `;
 
 export const UserList = styled.div`

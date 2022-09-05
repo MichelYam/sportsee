@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-//API
-import { useSportSeeAPi } from '../../../services/useSportSeeApi';
-
 //Recharts
 import {
     BarChart,

@@ -14,7 +14,7 @@ import Score from '../../components/charts/Score/Score';
 import { StyledDashboard, Content, Title, TitleSpan, MsgCongrat, Dashboard, DashBoardColumn, DashBoardBottom } from './style.js';
 
 
-import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/useSportSeeApi'
+import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/sportSeeApi'
 
 /**
  * Creation dashboard page with all charts of user
@@ -34,6 +34,10 @@ export default function DashBoard() {
                 const userActivity = await getDailyActivity("activity", userId);
                 const userSessions = await getAverageSessions("average-sessions", userId);
                 const userPerf = await getRadarPerformance("performance", userId);
+                if (!userInfo && !userActivity && !userSessions && !userPerf) {
+                    console.log("test")
+                }
+
                 setData({ userInfo, userActivity, userSessions, userPerf });
 
             } catch (error) {
