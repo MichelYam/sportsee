@@ -9,7 +9,7 @@ Project 12 Source Code - Build an Analytics Dashboard with React from OpenClassr
 - [NodeJS (**version 12.18**)](https://nodejs.org/en/)
 - Npm
 - [Back-End](https://github.com/MichelYam/P12-back-end-dashboard.git)
-- change port in `app/index.js` to 3030
+- Don't forget to  change the port in `app/index.js` to 3030
 
 ### Launch the project
 - Forke and clone this repository
