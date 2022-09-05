@@ -23,7 +23,7 @@ export const NutriCardImg = styled.img`
 width: 100%;
 height: 100%;
 object-fit: cover;
-`
+`;
 
 export const NutriCardContent = styled.div`
 display: flex;
@@ -33,6 +33,7 @@ margin-left: 35px;
     margin: 10px 0px;
 }
 `;
+
 export const NutriCardContentValue = styled.p`
 font-family: 'Roboto';
 font-style: normal;
@@ -41,6 +42,7 @@ font-size: 20px;
 line-height: 24px;
 color: #282D30;
 `;
+
 export const NutriCardContentType = styled.span`
 font-family: 'Roboto';
 font-style: normal;
@@ -48,4 +50,4 @@ font-weight: 500;
 font-size: 14px;
 line-height: 24px;
 color: rgba(116, 121, 140, 1);
-`
+`;
