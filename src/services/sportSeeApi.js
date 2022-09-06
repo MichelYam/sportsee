@@ -14,7 +14,7 @@ const activityTitleFR = {
 
 /**
  * get data from Api
- * @param {string} service 
+ * @param {string} service - service to get the data
  * @param {string} userId - the id of user
  * @returns data object
  */
@@ -33,8 +33,8 @@ export const sportSeeAPi = async (service, userId) => {
 
 /**
  * Get url from service and id
- * @param {*} service 
- * @param {*} userID - the id of user
+ * @param {string} service - service to get the data
+ * @param {string} userID - the id of user
  * @returns url
  */
 const getEndPoints = (service, userID) => {
@@ -53,8 +53,7 @@ const getEndPoints = (service, userID) => {
 }
 /**
  * Get user information
- * @param {*} service - service to get the data
- * @param {*} userId - the id of user
+ * @param {string} userId - the id of user
  * @returns Object
  */
 export const getUserInfo = async (userId) => {
@@ -64,8 +63,7 @@ export const getUserInfo = async (userId) => {
 
 /**
  * Get daily activity of user
- * @param {*} service - service to get the data
- * @param {*} userId - the id of user
+ * @param {string} userId - the id of user
  * @returns 
  */
 export const getDailyActivity = async (userId) => {
@@ -82,8 +80,7 @@ export const getDailyActivity = async (userId) => {
 
 /**
  * Get average session of user 
- * @param {*} service - service to get the data
- * @param {*} userId - the id of user
+ * @param {string} userId - the id of user
  * @returns 
  */
 export const getAverageSessions = async (userId) => {
@@ -96,8 +93,7 @@ export const getAverageSessions = async (userId) => {
 
 /**
  * Get performance of user 
- * @param {*} service - service to get the data
- * @param {*} userId - the id of user
+ * @param {string} userId - the id of user
  * @returns 
  */
 export const getRadarPerformance = async (userId) => {
