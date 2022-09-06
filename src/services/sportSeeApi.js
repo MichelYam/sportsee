@@ -21,8 +21,8 @@ const activityTitleFR = {
 export const sportSeeAPi = async (service, userId) => {
     const endpoint = getEndPoints(service, userId);
     if (!endpoint) return
+    const url = `${baseUrl}/${endpoint}`;
     try {
-        const url = `${baseUrl}/${endpoint}`;
         const response = await fetch(url);
         const data = await response.json();
         return data;
@@ -57,8 +57,8 @@ const getEndPoints = (service, userID) => {
  * @param {*} userId - the id of user
  * @returns Object
  */
-export const getUserInfo = async (service, userId) => {
-    const data = await sportSeeAPi(service, userId);
+export const getUserInfo = async (userId) => {
+    const data = await sportSeeAPi("userInfo", userId);
     return userModel(data.data);
 }
 
@@ -68,8 +68,8 @@ export const getUserInfo = async (service, userId) => {
  * @param {*} userId - the id of user
  * @returns 
  */
-export const getDailyActivity = async (service, userId) => {
-    const { data } = await sportSeeAPi(service, userId);
+export const getDailyActivity = async (userId) => {
+    const { data } = await sportSeeAPi("activity", userId);
     if (data) {
         const sessions = data.sessions.map(item => {
             const [yyyy, mm, dd] = item.day.split("-");
@@ -86,8 +86,8 @@ export const getDailyActivity = async (service, userId) => {
  * @param {*} userId - the id of user
  * @returns 
  */
-export const getAverageSessions = async (service, userId) => {
-    const { data } = await sportSeeAPi(service, userId);
+export const getAverageSessions = async (userId) => {
+    const { data } = await sportSeeAPi("average-sessions", userId);
     if (data) {
         const sessions = data.sessions.map(a => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }));
         return sessionsModel({ ...data, sessions });
@@ -100,8 +100,8 @@ export const getAverageSessions = async (service, userId) => {
  * @param {*} userId - the id of user
  * @returns 
  */
-export const getRadarPerformance = async (service, userId) => {
-    const { data } = await sportSeeAPi(service, userId);
+export const getRadarPerformance = async (userId) => {
+    const { data } = await sportSeeAPi("performance", userId);
     for (let kind of Object.keys(activityTitleFR)) {
         for (let item of data.data) {
             if (item.kind.toString() === kind) {

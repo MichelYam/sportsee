@@ -5,6 +5,9 @@ import {
     USER_PERFORMANCE,
 } from "./mockData";
 
+//Models
+import { userModel, performanceModel, activitiesModel, sessionsModel } from "../models/index";
+
 const activityTitleFR = {
     1: "Cardio",
     2: "Energie",
@@ -14,66 +17,63 @@ const activityTitleFR = {
     6: "Intensité",
 };
 
-export function getUserById(userId) {
-    const user = USER_MAIN_DATA.find((elem) => elem.id === parseInt(userId))
-    return user
+/**
+ * Get user information
+ * @param {*} service - service to get the data
+ * @param {*} userId - the id of user
+ * @returns Object
+ */
+export const getUserInfo = (userId) => {
+    const userData = USER_MAIN_DATA.find((elem) => elem.id === parseInt(userId));
+    return userModel(userData);
 }
 
-
-export function getDailyActivityByID(userId) {
-    const userActivity = USER_ACTIVITY.find((elem) => elem.userId === parseInt(userId))
-    const test = refactorData(userActivity)
-    return test
-}
-
-
-function refactorData(data) {
-    if (data) {
-        const dailyActivity = [];
-
-        for (let item of data.sessions) {
-            // eslint-disable-next-line no-unused-vars
+/**
+ * Get daily activity of user
+ * @param {*} service - service to get the data
+ * @param {*} userId - the id of user
+ * @returns
+ */
+export const getDailyActivity = (userId) => {
+    const userData = USER_ACTIVITY.find((elem) => elem.userId === parseInt(userId));
+    if (userData) {
+        const sessions = userData.sessions.map(item => {
             const [yyyy, mm, dd] = item.day.split("-");
+            return ({ ...item, day: dd })
 
-            dailyActivity.push({
-                day: `${dd}`,
-                kilogram: item.kilogram,
-                calories: item.calories,
-            });
-        }
-        return dailyActivity;
+        })
+        return activitiesModel({ ...userData, sessions })
     }
 }
 
-export function averageSessions(userId) {
-    const data = USER_AVERAGE_SESSIONS.find((elem) => elem.userId === parseInt(userId))
-    return data.sessions
+/**
+ * Get average session of user
+ * @param {*} service - service to get the data
+ * @param {*} userId - the id of user
+ * @returns
+ */
+export const getAverageSessions = (userId) => {
+    const userData = USER_AVERAGE_SESSIONS.find((elem) => elem.userId === parseInt(userId));
+    if (userData) {
+        const sessions = userData.sessions.map(a => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }));
+        return sessionsModel({ ...userData, sessions });
+    }
 }
 
-
-export function getRadarPerformance(userId) {
-    const data = USER_PERFORMANCE.find((elem) => elem.userId === parseInt(userId));
-    return data
-}
-
-export function getLabel(data) {
-    const newArr = [];
+/**
+ * Get performance of user
+ * @param {*} service - service to get the data
+ * @param {*} userId - the id of user
+ * @returns
+ */
+export const getRadarPerformance = (userId) => {
+    const userData = USER_PERFORMANCE.find((elem) => elem.userId === parseInt(userId));
     for (let kind of Object.keys(activityTitleFR)) {
-        for (let item of data.data) {
-            if (item.kind == kind) {
-                newArr.push({
-                    kind: activityTitleFR[kind],
-                    value: item.value
-                })
+        for (let item of userData.data) {
+            if (item.kind.toString() === kind) {
+                item.kind = activityTitleFR[kind]
             }
         }
     }
-    return newArr;
-}
-
-
-export function getScoreOfUser(userId) {
-    const userInfo = getUserById(userId)
-
-    return userInfo.todayScore ? userInfo.todayScore : userInfo.score
+    return performanceModel(userData);
 }
