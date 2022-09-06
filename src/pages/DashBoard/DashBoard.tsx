@@ -11,10 +11,10 @@ import RadarPerf from '../../components/charts/RadarPerf/RadarPerf';
 import Score from '../../components/charts/Score/Score';
 
 // styles
-import { StyledDashboard, Content, Title, TitleSpan, MsgCongrat, Dashboard, DashBoardColumn, DashBoardBottom } from './style';
-
-
+import { StyledDashboard, Content, Title, TitleSpan, MsgCongrat, Dashboard, DashBoardColumn, DashBoardBottom } from './style.js';
+// Api
 import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/sportSeeApi'
+// import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/mock/mockApi'
 
 /**
  * Creation dashboard page with all charts of user
@@ -30,10 +30,10 @@ export default function DashBoard() {
     useEffect(() => {
         const getData = async () => {
             try {
-                const userInfo = await getUserInfo("userInfo", userId);
-                const userActivity = await getDailyActivity("activity", userId);
-                const userSessions = await getAverageSessions("average-sessions", userId);
-                const userPerf = await getRadarPerformance("performance", userId);
+                const userInfo = await getUserInfo(userId);
+                const userActivity = await getDailyActivity(userId);
+                const userSessions = await getAverageSessions(userId);
+                const userPerf = await getRadarPerformance(userId);
                 if (!userInfo && !userActivity && !userSessions && !userPerf) {
                     console.log("test")
                 }
@@ -48,10 +48,8 @@ export default function DashBoard() {
                 setLoading(false);
             }
         }
-
         getData();
     }, [userId])
-
     return (
         <StyledDashboard>
             <Header />
