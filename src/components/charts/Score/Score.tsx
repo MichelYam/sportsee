@@ -6,8 +6,11 @@ import { StyledScore, ScoreTitle, ScoreContent, ScoreValue, ScoreValueText } fro
 
 //Recharts
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
-interface DataObject {
-    data: {}
+interface Props {
+    data: {
+        todayScore?: string,
+
+    }
 }
 
 /**
@@ -15,7 +18,7 @@ interface DataObject {
  * @param {object} param0 
  * @returns HTML Element
  */
-export const Score: React.FC<DataObject> = ({ data }) => {
+export const Score: React.FC<Props> = ({ data }) => {
     const pieData = [
         {
             name: "completed",

@@ -2,6 +2,7 @@
 import { userModel, performanceModel, activitiesModel, sessionsModel } from "./models";
 
 const baseUrl = "http://localhost:3030";
+
 interface LooseObject {
     [key: string]: string
 }
@@ -73,8 +74,8 @@ export const getDailyActivity = async (userId: string) => {
     const { data } = await sportSeeAPi("activity", userId);
     if (data) {
         const sessions = data.sessions.map((item: { day: { split: (arg0: string) => [any, any, any]; }; }) => {
-            const [yyyy, mm, dd] = item.day.split("-");
-            return ({ ...item, day: dd })
+            const day = item.day.split("-")[2];
+            return ({ ...item, day: day })
 
         })
         return activitiesModel({ ...data, sessions })

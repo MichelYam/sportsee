@@ -14,21 +14,8 @@ import { Score } from '../../components/charts/Score/Score';
 import { StyledDashboard, Content, Title, TitleSpan, MsgCongrat, Dashboard, DashBoardColumn, DashBoardBottom } from './style';
 // Api
 import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/sportSeeApi'
+import { UserModel, ActivityModel, PerformanceModel, SessionModel } from '../../services/interface';
 // import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/mock/mockApi'
-
-
-interface UserInfo {
-    data: {}
-}
-
-interface UserData {
-    data: {
-        userInfo: {} | undefined,
-        userActivity: {} | undefined,
-        userSessions: {} | undefined,
-        userPerf: {} | undefined,
-    } | undefined
-}
 
 /**
  * Creation dashboard page with all charts of user
@@ -36,18 +23,17 @@ interface UserData {
  */
 export const DashBoard: React.FC = () => {
     const { userId } = useParams<{ userId?: string }>();
-
-    const [data, setData] = useState<UserData>();
+    const [data, setData] = useState();
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const userInfo = await getUserInfo(userId as string);
-                const userActivity = await getDailyActivity(userId as string);
-                const userSessions = await getAverageSessions(userId as string);
-                const userPerf = await getRadarPerformance(userId as string);
+                const userInfo: UserModel = await getUserInfo(userId as string);
+                const userActivity: ActivityModel = await getDailyActivity(userId as string);
+                const userSessions: SessionModel = await getAverageSessions(userId as string);
+                const userPerf: PerformanceModel = await getRadarPerformance(userId as string);
                 if (!userInfo && !userActivity && !userSessions && !userPerf) {
                     console.log("test")
                 }
@@ -64,6 +50,9 @@ export const DashBoard: React.FC = () => {
         }
         getData();
     }, [userId])
+
+    console.log(data)
+
     return (
         <StyledDashboard>
             <Header />
@@ -76,14 +65,14 @@ export const DashBoard: React.FC = () => {
                             <MsgCongrat>Félicitation ! Vous avez explosé vos objectifs hier 👏</MsgCongrat>
                             <Dashboard>
                                 <DashBoardColumn>
-                                    <ActivityDaily data={data.userActivity.sessions} />
+                                    <ActivityDaily userData={data.userActivity.sessions} />
                                     <DashBoardBottom>
-                                        <AverageSessions data={data.userSessions} />
-                                        <RadarPerf data={data.userPerf} />
-                                        <Score data={data.userInfo} />
+                                        <AverageSessions userData={data.userSessions} />
+                                        <RadarPerf userData={data.userPerf} />
+                                        <Score userData={data.userInfo} />
                                     </DashBoardBottom>
                                 </DashBoardColumn>
-                                <ListCard data={data.userInfo} />
+                                <ListCard userData={data.userInfo.keyData} />
                             </Dashboard>
                         </>
                 }

@@ -1,5 +1,3 @@
-import { string } from "prop-types"
-
 export interface UserModel {
     id: string,
     keyData: {
@@ -8,8 +6,8 @@ export interface UserModel {
         lipidCount: number,
         proteinCount: number
     }
-    todayScore: number,
-    score: number,
+    todayScore?: number | null,
+    score?: number | null,
     userInfos:
     {
         firstName: string,
@@ -24,15 +22,14 @@ export interface ActivityModel {
         day: string,
         kilogram: number,
         calories: number
-    }
-    ]
+    }]
 }
 
 export interface PerformanceModel {
     userId: string,
-    sessions: [{
-        day: number,
-        sessionLength: number
+    data: [{
+        value: number,
+        kind: number
     }]
 }
 
@@ -41,10 +38,10 @@ export interface SessionModel {
     kind: {
         [key: string]: string
     },
-    data: [
+    sessions: [
         {
-            value: number,
-            kind: number
+            day: number,
+            sessionLength: number
         }
     ]
 }

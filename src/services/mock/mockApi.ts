@@ -8,7 +8,11 @@ import {
 //Models
 import { userModel, performanceModel, activitiesModel, sessionsModel } from "../models/index";
 
-const activityTitleFR = {
+interface LooseObject {
+    [key: string]: string
+}
+
+const activityTitleFR: LooseObject = {
     1: "Cardio",
     2: "Energie",
     3: "Endurance",
@@ -23,7 +27,7 @@ const activityTitleFR = {
  * @returns Object
  */
 export const getUserInfo = (userId: string) => {
-    const userData = USER_MAIN_DATA.find((elem) => elem.id === parseInt(userId));
+    const userData = USER_MAIN_DATA.find((elem: { id: number; }) => elem.id === parseInt(userId));
     return userModel(userData);
 }
 
@@ -33,11 +37,11 @@ export const getUserInfo = (userId: string) => {
  * @returns
  */
 export const getDailyActivity = (userId: string) => {
-    const userData = USER_ACTIVITY.find((elem) => elem.userId === parseInt(userId));
+    const userData = USER_ACTIVITY.find((elem: { userId: number; }) => elem.userId === parseInt(userId));
     if (userData) {
-        const sessions = userData.sessions.map(item => {
-            const [yyyy, mm, dd] = item.day.split("-");
-            return ({ ...item, day: dd })
+        const sessions = userData.sessions.map((item: { day: string; }) => {
+            const day = item.day.split("-")[2];
+            return ({ ...item, day: day })
 
         })
         return activitiesModel({ ...userData, sessions })
@@ -50,9 +54,9 @@ export const getDailyActivity = (userId: string) => {
  * @returns
  */
 export const getAverageSessions = (userId: string) => {
-    const userData = USER_AVERAGE_SESSIONS.find((elem) => elem.userId === parseInt(userId));
+    const userData = USER_AVERAGE_SESSIONS.find((elem: { userId: number; }) => elem.userId === parseInt(userId));
     if (userData) {
-        const sessions = userData.sessions.map(a => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }));
+        const sessions = userData.sessions.map((a: { day: number; }) => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }));
         return sessionsModel({ ...userData, sessions });
     }
 }
@@ -63,7 +67,7 @@ export const getAverageSessions = (userId: string) => {
  * @returns
  */
 export const getRadarPerformance = (userId: string) => {
-    const userData = USER_PERFORMANCE.find((elem) => elem.userId === parseInt(userId));
+    const userData = USER_PERFORMANCE.find((elem: { userId: number; }) => elem.userId === parseInt(userId));
     for (let kind of Object.keys(activityTitleFR)) {
         for (let item of userData.data) {
             if (item.kind.toString() === kind) {

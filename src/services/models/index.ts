@@ -40,7 +40,7 @@ export const activitiesModel = (data: ActivityModel) => {
  * @returns 
  */
 export const performanceModel = (data: PerformanceModel) => {
-    const test = {
+    return {
         userId: data.userId,
         kind: {
             1: 'cardio',
@@ -52,19 +52,6 @@ export const performanceModel = (data: PerformanceModel) => {
         },
         data: [...data.data].reverse(),
     }
-    // return {
-    //     userId: data.userId,
-    //     kind: {
-    //         1: 'cardio',
-    //         2: 'energy',
-    //         3: 'endurance',
-    //         4: 'strength',
-    //         5: 'speed',
-    //         6: 'intensity'
-    //     },
-    //     data: [...data.data].reverse(),
-    // }
-    console.log(test)
 }
 
 /**
