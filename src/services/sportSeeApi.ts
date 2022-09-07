@@ -2,8 +2,11 @@
 import { userModel, performanceModel, activitiesModel, sessionsModel } from "./models";
 
 const baseUrl = "http://localhost:3030";
+interface LooseObject {
+    [key: string]: string
+}
 
-const activityTitleFR = {
+const activityTitleFR: LooseObject = {
     1: "Cardio",
     2: "Energie",
     3: "Endurance",
@@ -54,7 +57,7 @@ const getEndPoints = (service: string, userId: string) => {
 /**
  * Get user information
  * @param {string} userId - the id of user
- * @returns Object
+ * @returns Promise
  */
 export const getUserInfo = async (userId: string) => {
     const data = await sportSeeAPi("userInfo", userId);
@@ -69,7 +72,7 @@ export const getUserInfo = async (userId: string) => {
 export const getDailyActivity = async (userId: string) => {
     const { data } = await sportSeeAPi("activity", userId);
     if (data) {
-        const sessions = data.sessions.map(item => {
+        const sessions = data.sessions.map((item: { day: { split: (arg0: string) => [any, any, any]; }; }) => {
             const [yyyy, mm, dd] = item.day.split("-");
             return ({ ...item, day: dd })
 
@@ -86,7 +89,7 @@ export const getDailyActivity = async (userId: string) => {
 export const getAverageSessions = async (userId: string) => {
     const { data } = await sportSeeAPi("average-sessions", userId);
     if (data) {
-        const sessions = data.sessions.map(a => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }));
+        const sessions = data.sessions.map((a: { day: number; }) => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }));
         return sessionsModel({ ...data, sessions });
     }
 }

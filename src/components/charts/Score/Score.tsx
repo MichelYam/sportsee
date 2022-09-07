@@ -6,13 +6,16 @@ import { StyledScore, ScoreTitle, ScoreContent, ScoreValue, ScoreValueText } fro
 
 //Recharts
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
+interface DataObject {
+    data: {}
+}
 
 /**
  * Creation chart of the user score
  * @param {object} param0 
  * @returns HTML Element
  */
-export default function Score({ data }) {
+export const Score: React.FC<DataObject> = ({ data }) => {
     const pieData = [
         {
             name: "completed",

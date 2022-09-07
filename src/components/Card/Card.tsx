@@ -4,13 +4,21 @@ import PropTypes from 'prop-types';
 //Styles
 import { NutriCard, NutriCardImgContent, NutriCardImg, NutriCardContent, NutriCardContentValue, NutriCardContentType } from "./style";
 
+interface PropsCard {
+  type: string,
+  value: string,
+  icon: string,
+  unit: string
+}
+
+
 /**
  * Creation calories card of user 
  * @param {*} param0 
  * @returns HTML element
  */
-export default function Card({ type, value, icon, unit }) {
-  const valueSemicolon = (data) => {
+export const Card: React.FC<PropsCard> = ({ icon, type, value, unit }: any) => {
+  const valueSemicolon = (data: string) => {
     const value = data.toString();
 
     if (value.length > 3) {
@@ -35,7 +43,7 @@ export default function Card({ type, value, icon, unit }) {
 
 Card.propTypes = {
   type: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.string.isRequired,
   icon: PropTypes.string.isRequired,
   unit: PropTypes.string.isRequired,
 }

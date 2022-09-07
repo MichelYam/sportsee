@@ -4,36 +4,50 @@ import { useParams } from 'react-router-dom';
 //Components
 import Header from '../../components/Header/Header';
 import SideBar from '../../components/SideBar/SideBar';
-import ListCard from '../../components/ListCard/ListCard';
-import ActivityDaily from '../../components/charts/ActivityDaily/ActivityDaily';
-import AverageSessions from '../../components/charts/AverrageSession/AverageSessions';
-import RadarPerf from '../../components/charts/RadarPerf/RadarPerf';
-import Score from '../../components/charts/Score/Score';
+import { ListCard } from '../../components/ListCard/ListCard';
+import { ActivityDaily } from '../../components/charts/ActivityDaily/ActivityDaily';
+import { AverageSessions } from '../../components/charts/AverrageSession/AverageSessions';
+import { RadarPerf } from '../../components/charts/RadarPerf/RadarPerf';
+import { Score } from '../../components/charts/Score/Score';
 
 // styles
-import { StyledDashboard, Content, Title, TitleSpan, MsgCongrat, Dashboard, DashBoardColumn, DashBoardBottom } from './style.js';
+import { StyledDashboard, Content, Title, TitleSpan, MsgCongrat, Dashboard, DashBoardColumn, DashBoardBottom } from './style';
 // Api
 import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/sportSeeApi'
 // import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/mock/mockApi'
+
+
+interface UserInfo {
+    data: {}
+}
+
+interface UserData {
+    data: {
+        userInfo: {} | undefined,
+        userActivity: {} | undefined,
+        userSessions: {} | undefined,
+        userPerf: {} | undefined,
+    } | undefined
+}
 
 /**
  * Creation dashboard page with all charts of user
  * @returns jsx element
  */
-export default function DashBoard() {
-    const { userId } = useParams();
+export const DashBoard: React.FC = () => {
+    const { userId } = useParams<{ userId?: string }>();
 
-    const [data, setData] = useState({});
+    const [data, setData] = useState<UserData>();
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const userInfo = await getUserInfo(userId);
-                const userActivity = await getDailyActivity(userId);
-                const userSessions = await getAverageSessions(userId);
-                const userPerf = await getRadarPerformance(userId);
+                const userInfo = await getUserInfo(userId as string);
+                const userActivity = await getDailyActivity(userId as string);
+                const userSessions = await getAverageSessions(userId as string);
+                const userPerf = await getRadarPerformance(userId as string);
                 if (!userInfo && !userActivity && !userSessions && !userPerf) {
                     console.log("test")
                 }

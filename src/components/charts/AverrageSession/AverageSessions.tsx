@@ -14,12 +14,16 @@ import {
     ResponsiveContainer
 } from "recharts";
 
+interface DataObject {
+    data: {}
+}
+
 /**
  * Creation chart of the average session of the user
  * @param {object} param0 
  * @returns HTML Element
  */
-export default function AverageSessions({ data }) {
+export const AverageSessions: React.FC<DataObject> = ({ data }) => {
 
     return (
         <StylesAverageSession>

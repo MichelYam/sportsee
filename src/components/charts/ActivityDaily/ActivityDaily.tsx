@@ -10,18 +10,31 @@ import {
     CartesianGrid,
     Tooltip,
     Legend,
-    ResponsiveContainer
+    ResponsiveContainer,
+    TooltipProps
 } from "recharts";
+import { ValueType, NameType, } from 'recharts/src/component/DefaultTooltipContent';
 
 //Styles
 import { StyledAcitivtyDaily, TitleDailyActivity, CustomTooltipItem, CustomTooltipContainer } from './style';
+
+interface DataObject {
+    data: {
+        userId: string,
+        sessions: {
+            day: string,
+            kilogram: number,
+            calories: number,
+        },
+    }
+}
 
 /**
  * Creation chart of the daily activities of the user
  * @param {Object} param0 
  * @returns HTML Element
  */
-export default function ActivityDaily({ data }) {
+export const ActivityDaily: React.FC<DataObject> = ({ data }) => {
     return (
         <>
             {
@@ -42,7 +55,7 @@ export default function ActivityDaily({ data }) {
                                     cursor={{
                                         fill: "rgba(0, 0, 0, 0.1)",
                                     }} />
-                                <Legend verticalAlign="top" align='right' radius={[10, 10, 0, 0]} iconType={'circle'} iconSize={10} />
+                                <Legend verticalAlign="top" align='right' iconType={'circle'} iconSize={10} />
                                 <Bar name="Poids (Kg)" yAxisId="kg" radius={[10, 10, 0, 0]} dataKey="kilogram" fill="#282D30" maxBarSize={8} />
                                 <Bar name="Calories brûlées (KCal)" yAxisId="cal" radius={[10, 10, 0, 0]} dataKey="calories" fill="#E60000" maxBarSize={8} />
                             </BarChart>
@@ -53,7 +66,8 @@ export default function ActivityDaily({ data }) {
     )
 }
 
-const CustomTooltip = ({ active, payload, label }) => {
+
+const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
     if (active && payload && payload.length) {
         return (
             <CustomTooltipContainer>
@@ -66,5 +80,5 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 ActivityDaily.propTypes = {
-    data: PropTypes.array.isRequired,
+    data: PropTypes.object.isRequired,
 }

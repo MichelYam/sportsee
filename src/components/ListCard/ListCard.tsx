@@ -5,14 +5,18 @@ import PropTypes from "prop-types";
 import { DashBoardNutri } from './style';
 
 //Component
-import Card from '../Card/Card';
+import { Card } from '../Card/Card';
+
+interface CardData {
+    data: {}
+}
 
 /**
  * Creation list of card 
  * @param {object} param0 
  * @returns HTML Element
  */
-export default function ListCard({ data }) {
+export const ListCard: React.FC<CardData> = ({ data }) => {
 
     return (
         <DashBoardNutri>

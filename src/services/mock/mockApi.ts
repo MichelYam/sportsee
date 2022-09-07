@@ -19,22 +19,20 @@ const activityTitleFR = {
 
 /**
  * Get user information
- * @param {*} service - service to get the data
  * @param {*} userId - the id of user
  * @returns Object
  */
-export const getUserInfo = (userId) => {
+export const getUserInfo = (userId: string) => {
     const userData = USER_MAIN_DATA.find((elem) => elem.id === parseInt(userId));
     return userModel(userData);
 }
 
 /**
  * Get daily activity of user
- * @param {*} service - service to get the data
  * @param {*} userId - the id of user
  * @returns
  */
-export const getDailyActivity = (userId) => {
+export const getDailyActivity = (userId: string) => {
     const userData = USER_ACTIVITY.find((elem) => elem.userId === parseInt(userId));
     if (userData) {
         const sessions = userData.sessions.map(item => {
@@ -48,11 +46,10 @@ export const getDailyActivity = (userId) => {
 
 /**
  * Get average session of user
- * @param {*} service - service to get the data
  * @param {*} userId - the id of user
  * @returns
  */
-export const getAverageSessions = (userId) => {
+export const getAverageSessions = (userId: string) => {
     const userData = USER_AVERAGE_SESSIONS.find((elem) => elem.userId === parseInt(userId));
     if (userData) {
         const sessions = userData.sessions.map(a => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }));
@@ -62,11 +59,10 @@ export const getAverageSessions = (userId) => {
 
 /**
  * Get performance of user
- * @param {*} service - service to get the data
  * @param {*} userId - the id of user
  * @returns
  */
-export const getRadarPerformance = (userId) => {
+export const getRadarPerformance = (userId: string) => {
     const userData = USER_PERFORMANCE.find((elem) => elem.userId === parseInt(userId));
     for (let kind of Object.keys(activityTitleFR)) {
         for (let item of userData.data) {

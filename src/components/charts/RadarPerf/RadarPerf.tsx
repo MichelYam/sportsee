@@ -6,13 +6,15 @@ import { StyledRadarPerf } from './style';
 
 //Recharts
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, ResponsiveContainer } from 'recharts';
-
+interface DataObject {
+    data: {}
+}
 /**
  * Creation chart of the user performance
  * @param {object} param0 
  * @returns HTML Element
  */
-export default function RadarPerf({ data }) {
+export const RadarPerf: React.FC<DataObject> = ({ data }) => {
     return (
         <StyledRadarPerf>
             <ResponsiveContainer width="100%" height="100%">

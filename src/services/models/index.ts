@@ -1,9 +1,11 @@
+import { UserModel, ActivityModel, PerformanceModel, SessionModel } from "../interface";
+
 /**
  * 
  * @param {object} data 
  * @returns 
  */
- export const userModel = (data) => {
+export const userModel = (data: UserModel) => {
     return {
         id: data.id,
         keyData: {
@@ -25,7 +27,7 @@
  * @param {object} data 
  * @returns 
  */
-export const activitiesModel = (data) => {
+export const activitiesModel = (data: ActivityModel) => {
     return {
         userId: data.userId,
         sessions: [...data.sessions],
@@ -37,8 +39,8 @@ export const activitiesModel = (data) => {
  * @param {object} data 
  * @returns 
  */
-export const performanceModel = (data) => {
-    return {
+export const performanceModel = (data: PerformanceModel) => {
+    const test = {
         userId: data.userId,
         kind: {
             1: 'cardio',
@@ -50,6 +52,19 @@ export const performanceModel = (data) => {
         },
         data: [...data.data].reverse(),
     }
+    // return {
+    //     userId: data.userId,
+    //     kind: {
+    //         1: 'cardio',
+    //         2: 'energy',
+    //         3: 'endurance',
+    //         4: 'strength',
+    //         5: 'speed',
+    //         6: 'intensity'
+    //     },
+    //     data: [...data.data].reverse(),
+    // }
+    console.log(test)
 }
 
 /**
@@ -57,7 +72,7 @@ export const performanceModel = (data) => {
  * @param {object} data 
  * @returns 
  */
-export const sessionsModel = (data) => {
+export const sessionsModel = (data: SessionModel) => {
     return {
         userId: data.userId,
         sessions: [...data.sessions]

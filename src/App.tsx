@@ -1,19 +1,22 @@
+// import './App.css';
 import React from 'react';
+// Components
+import { DashBoard } from './pages/DashBoard/DashBoard';
+import Home from './pages/Home/index';
 
-import './App.css';
-import DashBoard from './pages/DashBoard/DashBoard';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-function App() {
-
+const App: React.FC = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/dashboard/:id' element={<DashBoard />} />
-        <Route path='/dashboard' element={<DashBoard />} />
-        <Route path='*' element={<Navigate to={`/dashboard/12`} />} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/dashboard/:userId' element={<DashBoard />} />
+          <Route path='*' element={<Navigate to={`/`} />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
