@@ -4,20 +4,20 @@ import DashBoard from './pages/DashBoard/DashBoard';
 
 import React from 'react';
 
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/index';
-
+import Error from "./pages/Error/index"
 function App() {
 
   return (
     <>
-      <Router>
+      <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/dashboard/:userId' element={<DashBoard />} />
-          <Route path='*' element={<Navigate to={`/`} />} />
+          <Route path='*' element={<Error />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </>
   );
 }

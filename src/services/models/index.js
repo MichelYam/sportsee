@@ -1,12 +1,12 @@
-
 /**
  * 
  * @param {object} data 
  * @returns 
  */
 export const userModel = (data) => {
+    console.log("data:", data)
     return {
-        id: data.id,
+        id: data?.id,
         keyData: {
             calorieCount: data.keyData.calorieCount,
             carbohydrateCount: data.keyData.carbohydrateCount,

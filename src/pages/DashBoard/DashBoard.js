@@ -22,24 +22,26 @@ import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance 
  */
 export default function DashBoard() {
     const { userId } = useParams();
-
     const [data, setData] = useState({});
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [codeError, setCodeError] = useState("");
+
+    const processError = (codeError) => {
+        setCodeError(codeError);
+        setError(true);
+        console.log(codeError);
+    }
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const userInfo = await getUserInfo(userId);
+                const userInfo = await getUserInfo(userId, processError);
                 const userActivity = await getDailyActivity(userId);
                 const userSessions = await getAverageSessions(userId);
                 const userPerf = await getRadarPerformance(userId);
-                if (!userInfo && !userActivity && !userSessions && !userPerf) {
-                    console.log("test")
-                }
-
+                console.log(userInfo)
                 setData({ userInfo, userActivity, userSessions, userPerf });
-
             } catch (error) {
                 console.log(error)
                 setError(true);
@@ -50,13 +52,14 @@ export default function DashBoard() {
         }
         getData();
     }, [userId])
+
     return (
         <StyledDashboard>
             <Header />
             <SideBar />
             <Content>
                 {
-                    error ? "API not working or user not found " : isLoading ? "Loading..." :
+                    codeError === "probleme_data" && error ? "utilisateur non trouvé" : error ? "API not working" : isLoading ? "Loading..." :
                         <>
                             <Title>Bonjour <TitleSpan>{!isLoading && data.userInfo.userInfos.firstName}</TitleSpan></Title>
                             <MsgCongrat>Félicitation ! Vous avez explosé vos objectifs hier 👏</MsgCongrat>

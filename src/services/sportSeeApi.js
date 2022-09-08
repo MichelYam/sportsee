@@ -16,17 +16,22 @@ const activityTitleFR = {
  * get data from Api
  * @param {string} service - service to get the data
  * @param {string} userId - the id of user
- * @returns data object
+ * @returns Promise
  */
-export const sportSeeAPi = async (service, userId) => {
+export const sportSeeAPi = async (service, userId, processError) => {
     const endpoint = getEndPoints(service, userId);
     if (!endpoint) return
     const url = `${baseUrl}/${endpoint}`;
     try {
         const response = await fetch(url);
         const data = await response.json();
+        if (!data.data) {
+            processError("probleme_data")
+        }
+        console.log(data)
         return data;
     } catch (error) {
+        processError("api_not_working")
         console.log(error)
     }
 }
@@ -54,23 +59,23 @@ const getEndPoints = (service, userID) => {
 /**
  * Get user information
  * @param {string} userId - the id of user
- * @returns Object
+ * @returns Promise
  */
-export const getUserInfo = async (userId) => {
-    const data = await sportSeeAPi("userInfo", userId);
+export const getUserInfo = async (userId, processError) => {
+    const data = await sportSeeAPi("userInfo", userId, processError);
     return userModel(data.data);
 }
 
 /**
  * Get daily activity of user
  * @param {string} userId - the id of user
- * @returns 
+ * @returns Promise
  */
 export const getDailyActivity = async (userId) => {
     const { data } = await sportSeeAPi("activity", userId);
     if (data) {
         const sessions = data.sessions.map(item => {
-            const [yyyy, mm, dd] = item.day.split("-");
+            const dd = item.day.split("-")[2];
             return ({ ...item, day: dd })
 
         })
@@ -81,7 +86,7 @@ export const getDailyActivity = async (userId) => {
 /**
  * Get average session of user 
  * @param {string} userId - the id of user
- * @returns 
+ * @returns Promise
  */
 export const getAverageSessions = async (userId) => {
     const { data } = await sportSeeAPi("average-sessions", userId);
@@ -94,7 +99,7 @@ export const getAverageSessions = async (userId) => {
 /**
  * Get performance of user 
  * @param {string} userId - the id of user
- * @returns 
+ * @returns Promise
  */
 export const getRadarPerformance = async (userId) => {
     const { data } = await sportSeeAPi("performance", userId);
