@@ -6,6 +6,7 @@ export interface UserModel {
         lipidCount: number,
         proteinCount: number
     }
+    // keyData: Record<string, number>;
     todayScore?: number | null,
     score?: number | null,
     userInfos:
@@ -18,30 +19,29 @@ export interface UserModel {
 
 export interface ActivityModel {
     userId: string,
-    sessions: [{
+    sessions:
+    {
         day: string,
         kilogram: number,
         calories: number
-    }]
+    }[],
+
 }
 
 export interface PerformanceModel {
     userId: string,
-    data: [{
+    kind: Record<number, string>;
+    data: {
         value: number,
         kind: number
-    }]
+    }[],
 }
 
 export interface SessionModel {
     userId: string,
-    kind: {
-        [key: string]: string
-    },
-    sessions: [
-        {
-            day: number,
-            sessionLength: number
-        }
-    ]
+    sessions: {
+        day: number,
+        sessionLength: number
+    }[],
+
 }

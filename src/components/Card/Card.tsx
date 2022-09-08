@@ -43,7 +43,7 @@ export const Card: React.FC<PropsCard> = ({ icon, type, value, unit }: any) => {
 
 Card.propTypes = {
   type: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
   icon: PropTypes.string.isRequired,
   unit: PropTypes.string.isRequired,
 }

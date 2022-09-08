@@ -16,6 +16,12 @@ import { StyledDashboard, Content, Title, TitleSpan, MsgCongrat, Dashboard, Dash
 import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/sportSeeApi'
 import { UserModel, ActivityModel, PerformanceModel, SessionModel } from '../../services/interface';
 // import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/mock/mockApi'
+interface ApiData {
+    userInfo?: UserModel | undefined,
+    userActivity?: ActivityModel | undefined,
+    userSessions?: SessionModel | undefined,
+    userPerf?: PerformanceModel | undefined,
+}
 
 /**
  * Creation dashboard page with all charts of user
@@ -23,20 +29,17 @@ import { UserModel, ActivityModel, PerformanceModel, SessionModel } from '../../
  */
 export const DashBoard: React.FC = () => {
     const { userId } = useParams<{ userId?: string }>();
-    const [data, setData] = useState();
+    const [data, setData] = useState<ApiData | undefined>();
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(false);
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const userInfo: UserModel = await getUserInfo(userId as string);
-                const userActivity: ActivityModel = await getDailyActivity(userId as string);
-                const userSessions: SessionModel = await getAverageSessions(userId as string);
-                const userPerf: PerformanceModel = await getRadarPerformance(userId as string);
-                if (!userInfo && !userActivity && !userSessions && !userPerf) {
-                    console.log("test")
-                }
+                const userInfo = await getUserInfo(userId as string);
+                const userActivity = await getDailyActivity(userId as string);
+                const userSessions = await getAverageSessions(userId as string);
+                const userPerf = await getRadarPerformance(userId as string);
 
                 setData({ userInfo, userActivity, userSessions, userPerf });
 
@@ -51,7 +54,7 @@ export const DashBoard: React.FC = () => {
         getData();
     }, [userId])
 
-    console.log(data)
+    console.log(data?.userActivity?.sessions)
 
     return (
         <StyledDashboard>
@@ -61,18 +64,18 @@ export const DashBoard: React.FC = () => {
                 {
                     error ? "API not working or user not found " : isLoading ? "Loading..." :
                         <>
-                            <Title>Bonjour <TitleSpan>{!isLoading && data.userInfo.userInfos.firstName}</TitleSpan></Title>
+                            <Title>Bonjour <TitleSpan>{!isLoading && data?.userInfo?.userInfos.firstName}</TitleSpan></Title>
                             <MsgCongrat>Félicitation ! Vous avez explosé vos objectifs hier 👏</MsgCongrat>
                             <Dashboard>
                                 <DashBoardColumn>
-                                    <ActivityDaily userData={data.userActivity.sessions} />
+                                    <ActivityDaily data={data?.userActivity?.sessions} />
                                     <DashBoardBottom>
-                                        <AverageSessions userData={data.userSessions} />
-                                        <RadarPerf userData={data.userPerf} />
-                                        <Score userData={data.userInfo} />
+                                        <AverageSessions data={data?.userSessions} />
+                                        <RadarPerf data={data?.userPerf} />
+                                        <Score data={data?.userInfo} />
                                     </DashBoardBottom>
                                 </DashBoardColumn>
-                                <ListCard userData={data.userInfo.keyData} />
+                                <ListCard data={data?.userInfo?.keyData} />
                             </Dashboard>
                         </>
                 }

@@ -8,8 +8,8 @@ import { StyledScore, ScoreTitle, ScoreContent, ScoreValue, ScoreValueText } fro
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
 interface Props {
     data: {
-        todayScore?: string,
-
+        todayScore?: number,
+        score?: number
     }
 }
 
