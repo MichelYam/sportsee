@@ -38,7 +38,7 @@ export default function ActivityDaily({ data }) {
                                 <XAxis dataKey="day" dy={16} domain={["dataMin - 10", "dataMax + 2"]} style={{ fill: "#9B9EAC", fontSize: 14 }} />
                                 <YAxis yAxisId="kg" dataKey="kilogram" orientation="right" domain={["dataMin - 1", "dataMax + 2"]} />
                                 <YAxis yAxisId="cal" dataKey="calories" domain={[0, "dataMax + 150"]} hide={true} />
-                                <Tooltip content={<CustomTooltip />}
+                                <Tooltip wrapperStyle={{ outline: "none" }} content={<CustomTooltip />}
                                     cursor={{
                                         fill: "rgba(0, 0, 0, 0.1)",
                                     }} />

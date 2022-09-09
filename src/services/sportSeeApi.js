@@ -28,7 +28,6 @@ export const sportSeeAPi = async (service, userId, processError) => {
         if (!data.data) {
             processError("probleme_data")
         }
-        console.log(data)
         return data;
     } catch (error) {
         processError("api_not_working")
@@ -71,8 +70,8 @@ export const getUserInfo = async (userId, processError) => {
  * @param {string} userId - the id of user
  * @returns Promise
  */
-export const getDailyActivity = async (userId) => {
-    const { data } = await sportSeeAPi("activity", userId);
+export const getDailyActivity = async (userId, processError) => {
+    const { data } = await sportSeeAPi("activity", userId, processError);
     if (data) {
         const sessions = data.sessions.map(item => {
             const dd = item.day.split("-")[2];
@@ -88,8 +87,8 @@ export const getDailyActivity = async (userId) => {
  * @param {string} userId - the id of user
  * @returns Promise
  */
-export const getAverageSessions = async (userId) => {
-    const { data } = await sportSeeAPi("average-sessions", userId);
+export const getAverageSessions = async (userId, processError) => {
+    const { data } = await sportSeeAPi("average-sessions", userId, processError);
     if (data) {
         const sessions = data.sessions.map(a => ({ ...a, day: ['L', 'M', 'M', 'J', 'V', 'S', 'D'][a.day - 1] }));
         return sessionsModel({ ...data, sessions });
@@ -101,8 +100,8 @@ export const getAverageSessions = async (userId) => {
  * @param {string} userId - the id of user
  * @returns Promise
  */
-export const getRadarPerformance = async (userId) => {
-    const { data } = await sportSeeAPi("performance", userId);
+export const getRadarPerformance = async (userId, processError) => {
+    const { data } = await sportSeeAPi("performance", userId, processError);
     for (let kind of Object.keys(activityTitleFR)) {
         for (let item of data.data) {
             if (item.kind.toString() === kind) {

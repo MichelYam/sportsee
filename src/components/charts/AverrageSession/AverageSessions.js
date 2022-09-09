@@ -49,6 +49,7 @@ export default function AverageSessions({ data }) {
                     />
                     <YAxis dataKey='sessionLength' hide={true} stroke="rgba(255, 255, 255, 0.6)" axisLine={false} dy={10} domain={[0, "dataMax + 60"]} />
                     <Tooltip content={<CustomTooltip />}
+                        wrapperStyle={{ outline: "none" }}
                         cursor={{
                             stroke: "rgba(0, 0, 0, 0.1)",
                             strokeWidth: 32,

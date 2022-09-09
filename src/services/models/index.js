@@ -4,20 +4,19 @@
  * @returns 
  */
 export const userModel = (data) => {
-    console.log("data:", data)
     return {
         id: data?.id,
         keyData: {
-            calorieCount: data.keyData.calorieCount,
-            carbohydrateCount: data.keyData.carbohydrateCount,
-            lipidCount: data.keyData.lipidCount,
-            proteinCount: data.keyData.proteinCount,
+            calorieCount: data?.keyData?.calorieCount,
+            carbohydrateCount: data?.keyData?.carbohydrateCount,
+            lipidCount: data?.keyData?.lipidCount,
+            proteinCount: data?.keyData?.proteinCount,
         },
-        todayScore: data.todayScore ?? data?.score,
+        todayScore: data?.todayScore ?? data?.score,
         userInfos: {
-            firstName: data.userInfos.firstName,
-            lastName: data.userInfos.lastName,
-            age: data.userInfos.age,
+            firstName: data?.userInfos?.firstName,
+            lastName: data?.userInfos?.lastName,
+            age: data?.userInfos?.age,
         }
     }
 }
@@ -28,8 +27,8 @@ export const userModel = (data) => {
  */
 export const activitiesModel = (data) => {
     return {
-        userId: data.userId,
-        sessions: [...data.sessions],
+        userId: data?.userId,
+        sessions: [...data?.sessions],
     }
 }
 
@@ -40,7 +39,7 @@ export const activitiesModel = (data) => {
  */
 export const performanceModel = (data) => {
     return {
-        userId: data.userId,
+        userId: data?.userId,
         kind: {
             1: 'cardio',
             2: 'energy',
@@ -49,7 +48,7 @@ export const performanceModel = (data) => {
             5: 'speed',
             6: 'intensity'
         },
-        data: [...data.data].reverse(),
+        data: [...data?.data].reverse(),
     }
 }
 
@@ -60,7 +59,7 @@ export const performanceModel = (data) => {
  */
 export const sessionsModel = (data) => {
     return {
-        userId: data.userId,
-        sessions: [...data.sessions]
+        userId: data?.userId,
+        sessions: [...data?.sessions]
     }
 }
