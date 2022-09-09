@@ -18,13 +18,13 @@ export default function Header() {
                             <NavbarMenuItemLink href='/'>Accueil</NavbarMenuItemLink>
                         </NavBarMenuItem>
                         <NavBarMenuItem>
-                            <NavbarMenuItemLink href='/'>Profil</NavbarMenuItemLink>
+                            <NavbarMenuItemLink href='#'>Profil</NavbarMenuItemLink>
                         </NavBarMenuItem>
                         <NavBarMenuItem>
-                            <NavbarMenuItemLink href='/'>Réglage</NavbarMenuItemLink>
+                            <NavbarMenuItemLink href='#'>Réglage</NavbarMenuItemLink>
                         </NavBarMenuItem>
                         <NavBarMenuItem>
-                            <NavbarMenuItemLink href='/'>Communauté</NavbarMenuItemLink>
+                            <NavbarMenuItemLink href='#'>Communauté</NavbarMenuItemLink>
                         </NavBarMenuItem>
                     </NavBarMenu>
                 </NavBar>

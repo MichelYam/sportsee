@@ -38,7 +38,7 @@ export const getDailyActivity = (userId) => {
     const userData = USER_ACTIVITY.find((elem) => elem.userId === parseInt(userId));
     if (userData) {
         const sessions = userData.sessions.map(item => {
-            const [yyyy, mm, dd] = item.day.split("-");
+            const dd = item.day.split("-")[2];
             return ({ ...item, day: dd })
 
         })

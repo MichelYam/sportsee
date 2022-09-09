@@ -40,9 +40,9 @@ export default function DashBoard() {
         const getData = async () => {
             try {
                 const userInfo = await getUserInfo(userId, processError);
-                const userActivity = await getDailyActivity(userId);
-                const userSessions = await getAverageSessions(userId);
-                const userPerf = await getRadarPerformance(userId);
+                const userActivity = await getDailyActivity(userId, processError);
+                const userSessions = await getAverageSessions(userId, processError);
+                const userPerf = await getRadarPerformance(userId, processError);
 
                 setData({ userInfo, userActivity, userSessions, userPerf });
             } catch (error) {
