@@ -62,7 +62,7 @@ export default function DashBoard() {
             <SideBar />
             <Content>
                 {
-                    codeError === "probleme_data" && error ? "utilisateur non trouvé" : error ? "API not working" : isLoading ? "Loading..." :
+                    codeError === "probleme_data" && error ? "User not found" : error ? "API not working" : isLoading ? "Loading..." :
                         <>
                             <Title>Bonjour <TitleSpan>{!isLoading && data.userInfo.userInfos.firstName}</TitleSpan></Title>
                             <MsgCongrat>Félicitation ! Vous avez explosé vos objectifs hier 👏</MsgCongrat>
