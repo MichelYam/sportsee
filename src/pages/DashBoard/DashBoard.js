@@ -34,13 +34,16 @@ export default function DashBoard() {
     }
 
     useEffect(() => {
+        /**
+         * get data from api
+         */
         const getData = async () => {
             try {
                 const userInfo = await getUserInfo(userId, processError);
                 const userActivity = await getDailyActivity(userId);
                 const userSessions = await getAverageSessions(userId);
                 const userPerf = await getRadarPerformance(userId);
-                console.log(userInfo)
+
                 setData({ userInfo, userActivity, userSessions, userPerf });
             } catch (error) {
                 console.log(error)
