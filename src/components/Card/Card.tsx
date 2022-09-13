@@ -6,7 +6,7 @@ import { NutriCard, NutriCardImgContent, NutriCardImg, NutriCardContent, NutriCa
 
 interface PropsCard {
   type: string,
-  value: number,
+  value?: number,
   icon: string,
   unit: string
 }

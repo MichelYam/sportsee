@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // styled
 import { StyledCustomTooltip, StylesAverageSession, AverageSessionSpan, AverageSessionTitle } from './style'
-
+import { ValueType, NameType } from 'recharts/src/component/DefaultTooltipContent';
 //Recharts
 import {
     LineChart,
@@ -13,9 +13,12 @@ import {
     Tooltip,
     ResponsiveContainer
 } from "recharts";
-
-interface DataObject {
-    data: {}
+import { TooltipProps } from 'recharts';
+interface Data {
+    data?: {
+        day: string,
+        sessionLength: number
+    }[],
 }
 
 /**
@@ -23,7 +26,7 @@ interface DataObject {
  * @param {object} param0 
  * @returns HTML Element
  */
-export const AverageSessions: React.FC<DataObject> = ({ data }) => {
+export const AverageSessions: React.FC<Data> = ({ data }) => {
 
     return (
         <StylesAverageSession>
@@ -34,7 +37,7 @@ export const AverageSessions: React.FC<DataObject> = ({ data }) => {
                 </AverageSessionSpan>
             </AverageSessionTitle>
             <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={data.sessions} outerRadius="70%">
+                <LineChart data={data} outerRadius="70%">
                     <Line type="monotone" dataKey="sessionLength" stroke="#FFFFFF" strokeWidth={2} dot={false} activeDot={{
                         stroke: "rgba(255, 255, 255, 0.6)",
                         strokeWidth: 10,
@@ -62,14 +65,13 @@ export const AverageSessions: React.FC<DataObject> = ({ data }) => {
         </StylesAverageSession>
     )
 }
-
-const CustomTooltip = ({ active, payload }) => {
+const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>): JSX.Element => {
     if (active && payload) {
         return <StyledCustomTooltip>{`${payload[0].value} min`}</StyledCustomTooltip >;
     }
-    return null;
+    return <></>;
 };
 
 AverageSessions.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.array.isRequired,
 }

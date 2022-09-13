@@ -7,14 +7,14 @@ import { UserModel, ActivityModel, PerformanceModel, SessionModel } from "../int
  */
 export const userModel = (data: UserModel) => {
     return {
-        id: data.id,
+        id: data?.id,
         keyData: {
-            calorieCount: data.keyData.calorieCount,
-            carbohydrateCount: data.keyData.carbohydrateCount,
-            lipidCount: data.keyData.lipidCount,
-            proteinCount: data.keyData.proteinCount,
+            calorieCount: data?.keyData?.calorieCount,
+            carbohydrateCount: data?.keyData?.carbohydrateCount,
+            lipidCount: data?.keyData?.lipidCount,
+            proteinCount: data?.keyData?.proteinCount,
         },
-        todayScore: data.todayScore ?? data?.score,
+        todayScore: data?.todayScore ?? data?.score,
         userInfos: {
             firstName: data.userInfos.firstName,
             lastName: data.userInfos.lastName,
@@ -53,7 +53,6 @@ export const performanceModel = (data: PerformanceModel) => {
         data: [...data.data].reverse(),
     }
 }
-
 /**
  * 
  * @param {object} data 

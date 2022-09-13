@@ -13,14 +13,16 @@ import { Score } from '../../components/charts/Score/Score';
 // styles
 import { StyledDashboard, Content, Title, TitleSpan, MsgCongrat, Dashboard, DashBoardColumn, DashBoardBottom } from './style';
 // Api
-import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/sportSeeApi'
+// import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/sportSeeApi'
+import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/mock/mockApi'
+
 import { UserModel, ActivityModel, PerformanceModel, SessionModel } from '../../services/interface';
-// import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/mock/mockApi'
+
 interface ApiData {
-    userInfo?: UserModel | undefined,
-    userActivity?: ActivityModel | undefined,
-    userSessions?: SessionModel | undefined,
-    userPerf?: PerformanceModel | undefined,
+    userInfo?: UserModel,
+    userActivity?: ActivityModel,
+    userSessions?: SessionModel,
+    userPerf?: PerformanceModel,
 }
 
 /**
@@ -32,17 +34,23 @@ export const DashBoard: React.FC = () => {
     const [data, setData] = useState<ApiData | undefined>();
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [codeError, setCodeError] = useState("");
+
+    const processError = (codeError: string) => {
+        setCodeError(codeError);
+        setError(true);
+        console.log(codeError);
+    }
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const userInfo = await getUserInfo(userId as string);
-                const userActivity = await getDailyActivity(userId as string);
-                const userSessions = await getAverageSessions(userId as string);
-                const userPerf = await getRadarPerformance(userId as string);
+                const userInfo = await getUserInfo(userId!, processError);
+                const userActivity = await getDailyActivity(userId!, processError);
+                const userSessions = await getAverageSessions(userId!, processError);
+                const userPerf = await getRadarPerformance(userId!, processError);
 
                 setData({ userInfo, userActivity, userSessions, userPerf });
-
             } catch (error) {
                 console.log(error)
                 setError(true);
@@ -54,15 +62,13 @@ export const DashBoard: React.FC = () => {
         getData();
     }, [userId])
 
-    console.log(data?.userActivity?.sessions)
-
     return (
         <StyledDashboard>
             <Header />
             <SideBar />
             <Content>
                 {
-                    error ? "API not working or user not found " : isLoading ? "Loading..." :
+                    codeError === "probleme_data" && error ? "User not found" : error ? "API not working" : isLoading ? "Loading..." :
                         <>
                             <Title>Bonjour <TitleSpan>{!isLoading && data?.userInfo?.userInfos.firstName}</TitleSpan></Title>
                             <MsgCongrat>Félicitation ! Vous avez explosé vos objectifs hier 👏</MsgCongrat>
@@ -70,9 +76,9 @@ export const DashBoard: React.FC = () => {
                                 <DashBoardColumn>
                                     <ActivityDaily data={data?.userActivity?.sessions} />
                                     <DashBoardBottom>
-                                        <AverageSessions data={data?.userSessions} />
-                                        <RadarPerf data={data?.userPerf} />
-                                        <Score data={data?.userInfo} />
+                                        <AverageSessions data={data?.userSessions?.sessions} />
+                                        <RadarPerf data={data?.userPerf?.data} />
+                                        <Score data={data?.userInfo?.todayScore} />
                                     </DashBoardBottom>
                                 </DashBoardColumn>
                                 <ListCard data={data?.userInfo?.keyData} />

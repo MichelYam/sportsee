@@ -6,11 +6,10 @@ import { StyledScore, ScoreTitle, ScoreContent, ScoreValue, ScoreValueText } fro
 
 //Recharts
 import { Cell, Pie, PieChart, ResponsiveContainer } from 'recharts';
+
 interface Props {
-    data: {
-        todayScore?: number,
-        score?: number
-    }
+    data?: number,
+
 }
 
 /**
@@ -22,12 +21,12 @@ export const Score: React.FC<Props> = ({ data }) => {
     const pieData = [
         {
             name: "completed",
-            value: data.todayScore,
+            value: data,
             color: "#FF0000"
         },
         {
             name: "uncompleted",
-            value: 1 - data.todayScore,
+            value: 1 - data!,
             color: "transparent"
         }
     ]
@@ -51,7 +50,7 @@ export const Score: React.FC<Props> = ({ data }) => {
                 </PieChart>
             </ResponsiveContainer>
             <ScoreContent>
-                <ScoreValue>{`${data.todayScore * 100}%`}</ScoreValue>
+                <ScoreValue>{`${data! * 100}%`}</ScoreValue>
                 <ScoreValueText>de votre </ScoreValueText>
                 <ScoreValueText>objectif</ScoreValueText>
             </ScoreContent>
@@ -60,5 +59,5 @@ export const Score: React.FC<Props> = ({ data }) => {
 }
 
 Score.propTypes = {
-    data: PropTypes.object.isRequired
+    data: PropTypes.number.isRequired
 }

@@ -20,7 +20,12 @@ import { StyledAcitivtyDaily, TitleDailyActivity, CustomTooltipItem, CustomToolt
 import { ActivityModel } from "../../../services/interface"
 
 interface Data {
-    data: [] | undefined
+    data?:
+    {
+        day: string,
+        kilogram: number,
+        calories: number
+    }[],
 }
 
 /**

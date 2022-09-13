@@ -1,47 +1,43 @@
 export interface UserModel {
-    id: string,
+    id: string | number,
     keyData: {
         calorieCount: number,
         carbohydrateCount: number,
         lipidCount: number,
-        proteinCount: number
-    }
+        proteinCount: number,
+    },
     // keyData: Record<string, number>;
-    todayScore?: number | null,
-    score?: number | null,
-    userInfos:
-    {
+    todayScore?: number,
+    score?: number,
+    userInfos: {
         firstName: string,
         lastName: string,
-        age: number
+        age: number,
     }
 }
 
 export interface ActivityModel {
-    userId: string,
-    sessions:
-    {
+    userId: string | number,
+    sessions: {
         day: string,
         kilogram: number,
-        calories: number
+        calories: number,
     }[],
-
 }
 
 export interface PerformanceModel {
-    userId: string,
+    userId: string | number,
     kind: Record<number, string>;
     data: {
         value: number,
-        kind: number
+        kind: string | number,
     }[],
 }
 
 export interface SessionModel {
-    userId: string,
+    userId: string | number,
     sessions: {
-        day: number,
-        sessionLength: number
+        day: string,
+        sessionLength: number,
     }[],
-
 }

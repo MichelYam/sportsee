@@ -10,7 +10,12 @@ import { UserCard, UserLink, UserImage, UserContent } from './style';
  * @param {string} name - the name of user
  * @returns html element
  */
-export default function index({ id, name }) {
+
+interface User {
+    id: string,
+    name: string,
+}
+export default function index({ id, name }: User) {
 
     return (
         <UserCard>
