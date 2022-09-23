@@ -15,10 +15,7 @@ import {
 import { TooltipProps } from 'recharts';
 //Styles
 import { StyledAcitivtyDaily, TitleDailyActivity, CustomTooltipItem, CustomTooltipContainer } from './style';
-// import {
-//     ValueType,
-//     NameType,
-// } from 'recharts/src/component/DefaultTooltipContent';
+import { ValueType, NameType, } from 'recharts/src/component/DefaultTooltipContent';
 
 interface Data {
     data?:
@@ -49,13 +46,20 @@ export const ActivityDaily: React.FC<Data> = ({ data }) => {
                             >
                                 <CartesianGrid vertical={false} strokeDasharray="3 3" />
                                 <XAxis dataKey="day" dy={16} domain={["dataMin - 10", "dataMax + 2"]} style={{ fill: "#9B9EAC", fontSize: 14 }} />
-                                <YAxis yAxisId="kg" dataKey="kilogram" orientation="right" domain={["dataMin - 1", "dataMax + 2"]} />
+                                <YAxis yAxisId="kg" dx={16} dataKey="kilogram" orientation="right" domain={["dataMin - 1", "dataMax + 2"]} />
                                 <YAxis yAxisId="cal" dataKey="calories" domain={[0, "dataMax + 150"]} hide={true} />
                                 <Tooltip
                                     cursor={{
                                         fill: "rgba(0, 0, 0, 0.1)",
                                     }} />
-                                <Legend verticalAlign="top" align='right' iconType={'circle'} iconSize={10} />
+                                <Legend verticalAlign="top"
+                                    align='right'
+                                    iconType={'circle'}
+                                    iconSize={10}
+                                    wrapperStyle={{
+                                        right: 50,
+                                        top: 20,
+                                    }} />
                                 <Bar name="Poids (Kg)" yAxisId="kg" radius={[10, 10, 0, 0]} dataKey="kilogram" fill="#282D30" maxBarSize={8} />
                                 <Bar name="Calories brûlées (KCal)" yAxisId="cal" radius={[10, 10, 0, 0]} dataKey="calories" fill="#E60000" maxBarSize={8} />
                             </BarChart>
@@ -66,17 +70,17 @@ export const ActivityDaily: React.FC<Data> = ({ data }) => {
     )
 }
 
-// const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>): JSX.Element => {
-//     if (active && payload && payload.length) {
-//         return (
-//             <CustomTooltipContainer>
-//                 <CustomTooltipItem>{`${payload?.[0].value} kg`}</CustomTooltipItem>
-//                 <CustomTooltipItem>{`${payload?.[1].value} Kcal`}</CustomTooltipItem>
-//             </CustomTooltipContainer>
-//         );
-//     }
-//     return <></>;
-// };
+const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>): JSX.Element => {
+    if (active && payload && payload.length) {
+        return (
+            <CustomTooltipContainer>
+                <CustomTooltipItem>{`${payload?.[0].value} kg`}</CustomTooltipItem>
+                <CustomTooltipItem>{`${payload?.[1].value} Kcal`}</CustomTooltipItem>
+            </CustomTooltipContainer>
+        );
+    }
+    return <></>;
+};
 
 ActivityDaily.propTypes = {
     data: PropTypes.array.isRequired,

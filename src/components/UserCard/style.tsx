@@ -19,7 +19,8 @@ export const UserImage = styled.img`
 
 
 export const UserContent = styled.p`
-color:#ffffff;
+    color:#ffffff;
+    margin: 0;
 `;
 export const UserLink = styled(Link)`
     width:100%;
