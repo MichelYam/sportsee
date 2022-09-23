@@ -15,7 +15,6 @@ import {
 import { TooltipProps } from 'recharts';
 //Styles
 import { StyledAcitivtyDaily, TitleDailyActivity, CustomTooltipItem, CustomTooltipContainer } from './style';
-import { ValueType, NameType, } from 'recharts/src/component/DefaultTooltipContent';
 
 interface Data {
     data?:
@@ -48,7 +47,7 @@ export const ActivityDaily: React.FC<Data> = ({ data }) => {
                                 <XAxis dataKey="day" dy={16} domain={["dataMin - 10", "dataMax + 2"]} style={{ fill: "#9B9EAC", fontSize: 14 }} />
                                 <YAxis yAxisId="kg" dx={16} dataKey="kilogram" orientation="right" domain={["dataMin - 1", "dataMax + 2"]} />
                                 <YAxis yAxisId="cal" dataKey="calories" domain={[0, "dataMax + 150"]} hide={true} />
-                                <Tooltip
+                                <Tooltip wrapperStyle={{ outline: "none" }} content={<CustomTooltip />}
                                     cursor={{
                                         fill: "rgba(0, 0, 0, 0.1)",
                                     }} />
@@ -70,7 +69,7 @@ export const ActivityDaily: React.FC<Data> = ({ data }) => {
     )
 }
 
-const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>): JSX.Element => {
+const CustomTooltip = ({ active, payload, label }: TooltipProps<string, number>): JSX.Element => {
     if (active && payload && payload.length) {
         return (
             <CustomTooltipContainer>
