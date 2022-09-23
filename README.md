@@ -1,4 +1,4 @@
-[![forthebadge](https://forthebadge.com/images/badges/made-with-javascript.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-typescript.svg)](https://forthebadge.com)
 
 # Project 12 - Front-end Dashboard
 Project 12 Source Code - Build an Analytics Dashboard with React from OpenClassrooms Application Developer - JavaScript React track.
