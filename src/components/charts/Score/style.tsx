@@ -1,6 +1,5 @@
-//Styled
+//Styles
 import styled from 'styled-components';
-
 
 export const StyledScore = styled.div`
 width: 30%;

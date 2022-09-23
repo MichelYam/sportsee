@@ -31,7 +31,6 @@ export const RadarPerf: React.FC<Data> = ({ data }) => {
                         tick={{
                             fontSize: 12,
                             fontWeight: 400,
-                            // lineHeight: 24,
                         }} />
                     <PolarRadiusAxis axisLine={false} tick={false} />
                     <Radar dataKey="value"

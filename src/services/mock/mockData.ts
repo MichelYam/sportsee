@@ -199,27 +199,27 @@ export const USER_PERFORMANCE = [
         data: [
             {
                 value: 80,
-                kind: 1
+                kind: "1"
             },
             {
                 value: 120,
-                kind: 2
+                kind: "2"
             },
             {
                 value: 140,
-                kind: 3
+                kind: "3"
             },
             {
                 value: 50,
-                kind: 4
+                kind: "4"
             },
             {
                 value: 200,
-                kind: 5
+                kind: " 5"
             },
             {
                 value: 90,
-                kind: 6
+                kind: "6"
             }
         ]
     },
@@ -236,27 +236,27 @@ export const USER_PERFORMANCE = [
         data: [
             {
                 value: 200,
-                kind: 1
+                kind: "1"
             },
             {
                 value: 240,
-                kind: 2
+                kind: "2"
             },
             {
                 value: 80,
-                kind: 3
+                kind: "3"
             },
             {
                 value: 80,
-                kind: 4
+                kind: "4"
             },
             {
                 value: 220,
-                kind: 5
+                kind: "5"
             },
             {
                 value: 110,
-                kind: 6
+                kind: "6"
             }
         ]
     }

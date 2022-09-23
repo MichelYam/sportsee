@@ -76,7 +76,7 @@ export const getRadarPerformance = (userId: string, processError: (codeError: st
     for (let kind of Object.keys(activityTitleFR)) {
         for (let item of userData!.data) {
             if (item.kind.toString() === kind) {
-                item.kind = parseInt(activityTitleFR[kind])
+                item.kind = activityTitleFR[kind];
             }
         }
     }

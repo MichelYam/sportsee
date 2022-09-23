@@ -1,6 +1,5 @@
-//Styled
+//Styles
 import styled from 'styled-components';
-
 
 export const StylesAverageSession = styled.div`
     position relative;

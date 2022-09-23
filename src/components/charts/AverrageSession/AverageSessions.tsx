@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // styled
 import { StyledCustomTooltip, StylesAverageSession, AverageSessionSpan, AverageSessionTitle } from './style'
-import { ValueType, NameType } from 'recharts/src/component/DefaultTooltipContent';
+// import { ValueType, NameType } from 'recharts/src/component/DefaultTooltipContent';
 //Recharts
 import {
     LineChart,
@@ -55,7 +55,7 @@ export const AverageSessions: React.FC<Data> = ({ data }) => {
                         }}
                     />
                     <YAxis dataKey='sessionLength' hide={true} stroke="rgba(255, 255, 255, 0.6)" axisLine={false} dy={10} domain={[0, "dataMax + 60"]} />
-                    <Tooltip content={<CustomTooltip />}
+                    <Tooltip 
                         cursor={{
                             stroke: "rgba(0, 0, 0, 0.1)",
                             strokeWidth: 32,
@@ -65,12 +65,12 @@ export const AverageSessions: React.FC<Data> = ({ data }) => {
         </StylesAverageSession>
     )
 }
-const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>): JSX.Element => {
-    if (active && payload) {
-        return <StyledCustomTooltip>{`${payload[0].value} min`}</StyledCustomTooltip >;
-    }
-    return <></>;
-};
+// const CustomTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>): JSX.Element => {
+//     if (active && payload) {
+//         return <StyledCustomTooltip>{`${payload[0].value} min`}</StyledCustomTooltip >;
+//     }
+//     return <></>;
+// };
 
 AverageSessions.propTypes = {
     data: PropTypes.array.isRequired,

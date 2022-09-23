@@ -1,4 +1,4 @@
-//styled
+//styles
 import styled from 'styled-components';
 
 export const StyledSideBar = styled.div`
@@ -10,7 +10,7 @@ width: 117px;
 height: 100vh;
 display: flex;
 flex-direction: column;
-justify-content: space-evenly;
+justify-content: center;
 align-items: center;
 background: #000000;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -32,8 +32,13 @@ export const SideBarMenuItemLinkBg = styled.img`
 `;
 
 export const SideBarMenuCopyright = styled.p`
+position: absolute;
+bottom: 5%;
 writing-mode: vertical-rl;
 text-orientation: mixed;
 transform: rotate(180deg);
 color: #ffffff;
+font-weight: 500;
+font-size: 12px;
+line-height: 24px;
 `;

@@ -1,8 +1,6 @@
 //Styled
 import styled from 'styled-components';
 
-
-
 export const StyledRadarPerf = styled.div`
   width: 30%;
   height: 263px;

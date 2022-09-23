@@ -13,8 +13,7 @@ import { Score } from '../../components/charts/Score/Score';
 // styles
 import { StyledDashboard, Content, Title, TitleSpan, MsgCongrat, Dashboard, DashBoardColumn, DashBoardBottom } from './style';
 // Api
-// import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/sportSeeApi'
-import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/mock/mockApi'
+import { getDailyActivity, getUserInfo, getAverageSessions, getRadarPerformance } from '../../services/sportSeeApi'
 
 import { UserModel, ActivityModel, PerformanceModel, SessionModel } from '../../services/interface';
 

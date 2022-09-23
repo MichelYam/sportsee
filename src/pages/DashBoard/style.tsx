@@ -1,4 +1,4 @@
-//Styled
+//Styles
 import styled from 'styled-components';
 
 export const Dashboard = styled.div`
@@ -18,7 +18,6 @@ export const Content = styled.div`
 margin: 60px 0 0 180px;
 max-width: 1440px;
 height: 100%;
-
 @media only screen and (max-width: 1100px){
     margin: 40px 0 0 150px;
 }
