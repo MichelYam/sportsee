@@ -7,5 +7,4 @@ export const StyledRadarPerf = styled.div`
   border-radius: 5px;
   background-color: #282D30;
   overflow: hidden;
-  padding: 9px;
   `;

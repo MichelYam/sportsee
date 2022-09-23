@@ -33,6 +33,7 @@ font-family: 'Roboto', sans-serif;
 font-weight: 700;
 font-size: 26px;
 color: #282D30;
+margin: 0;
 `;
 
 export const ScoreValueText = styled.p`

@@ -4,7 +4,7 @@ export const NutriCard = styled.div`
 display: flex;
 align-items: center;
 border-radius: 5px;
-width: 258px;
+max-width: 258px;
 background-color: #FBFBFB;
 padding: 30px;
 @media only screen and (max-width: 1100px){
@@ -41,6 +41,7 @@ font-weight: 700;
 font-size: 20px;
 line-height: 24px;
 color: #282D30;
+margin: 0;
 `;
 
 export const NutriCardContentType = styled.span`
