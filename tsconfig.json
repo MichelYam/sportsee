@@ -140,9 +140,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
   },
   "include": [
     "./**/*"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
